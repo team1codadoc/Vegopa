@@ -2,7 +2,8 @@ import React from "react";
 import styled from "styled-components";
 
 import { FaAngleRight } from "react-icons/fa";
-import eating from "../img/charEating.png";
+
+import heehee from "../img/charHeeHee.png";
 
 const Wrapper = styled.section`
   padding: 4em;
@@ -28,11 +29,12 @@ const Button = styled.div`
   width: 65%;
   height: 140px;
   border-radius: 10px;
-  background: #F1F1F1;
+  background: #EAD1D1;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: relative;
   &:first-child {
     margin-top: 40px;
   }
@@ -45,6 +47,7 @@ const Title = styled.div`
   font-size: 2.5em;
   font-weight: bold;
   text-align: center;
+  padding-bottom: 10px;
 `;
 
 const Text = styled.p`
@@ -60,30 +63,29 @@ const Arrow = styled.div`
   width: 100%;
   display: flex;
   justify-content: flex-end;
-  margin-right: 70px;
+  margin-right: 40px;
   font-size: x-large;
+  position: absolute;
 `;
 
-const MainChoice = () => {
+const MethodChoice = () => {
   return (
     <Wrapper>
       <Container>
         <Button>
-          <Title>혼밥</Title>
+          <Title>골라줘!</Title>
           <Arrow><FaAngleRight /></Arrow>
-          <Text>혼자 드시는 </Text>
-          <Text>당신을 위해!</Text>
+          <Text>그냥 랜덤으로 추천해줘 </Text>
         </Button>
-        <Img src={eating} />
+        <Img src={heehee} />
         <Button>
-          <Title>같이</Title>
+          <Title>고를래~</Title>
           <Arrow><FaAngleRight /></Arrow>
-          <Text>함께 먹을 친구</Text>
-          <Text>구하러 가기!</Text>
+          <Text>내 취향대로 추천 받을래</Text>
         </Button>
       </Container>
     </Wrapper>
   );
 };
 
-export default MainChoice;
+export default MethodChoice;
