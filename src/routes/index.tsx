@@ -1,12 +1,14 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Main from "../pages/main";
+import MainChoice from "../pages/main";
+import MethodChoice from "../pages/method";
 
 const RootRoute = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Main />} />
+        <Route path="/" element={<MainChoice />} />
+        <Route path="/method" element={<MethodChoice />} />
       </Routes>
     </BrowserRouter>
   );
