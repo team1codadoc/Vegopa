@@ -15,7 +15,7 @@
   "plugins": ["react", "@typescript-eslint"],
   "rules": {
     "semi": "error",
-    "quotes": ["error", "single"],
+    "quotes": ["error", "double"],
     "eol-last": "error",
     "no-trailing-spaces": "error",
     "indent": ["error", 2],
