@@ -1,7 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import foodImage from "/assets/food/민초치킨.jpeg";
-import testIcon from "/assets/chain_icon.png";
+import { FcShop } from "react-icons/fc";
+import kakaoIcon from "/assets/kakao_icon.png";
+import facebookIcon from "/assets/facebook_icon.png";
+import twitterIcon from "/assets/twitter_icon.png";
 
 const ChoicResult = () => {
   return (
@@ -16,15 +19,18 @@ const ChoicResult = () => {
         <FoodImage src={foodImage} alt="food" />
       </ImageWrapper>
       <Button type="button">
+        <FcShop size="24" />
         <span className="ir">근처 맛집보기 버튼</span>
         <span>맛집 알아보기</span>
       </Button>
 
       <ShareContianer>
-        <img src="/assets/chain_icon.png" alt="share link" />
-        <img src="/assets/chain_icon.png" alt="share link" />
-        <img src="/assets/chain_icon.png" alt="share link" />
-        <img src="/assets/chain_icon.png" alt="share link" />
+        <div className="copy-link">
+          <img src="/assets/chain_icon.png" alt="share link" />
+        </div>
+        <img className="share-kakao" src={kakaoIcon} alt="kakao-share" />
+        <img className="share-facebook" src={facebookIcon} alt="facebook-share" />
+        <img className="share-twitter" src={twitterIcon} alt="twitter-share" />
       </ShareContianer>
     </Container>
   );
@@ -80,19 +86,15 @@ const FoodImage = styled.img`
 `;
 
 const Button = styled.button`
-  width: 210px;
-  height: 80px;
+  display: flex;
+  align-items: center;
   font-weight: 400;
   font-size: 14px;
-  line-height: 18px;
+  line-height: 24px;
 
-  ::before {
-    display: block;
-    content: "";
-    width: 20px;
-    height: 20px;
-    background: url(${testIcon});
-    margin-right: 6px;
+  span {
+    padding: 5px;
+    margin-bottom: -2px;
   }
 `;
 
@@ -103,10 +105,26 @@ const ShareContianer = styled.div`
   display: flex;
   justify-content: center;
 
+  .copy-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 38px;
+    height: 38px;
+    background-color: #f1f1f1;
+    margin: 0 5px;
+
+    img {
+      width: 25px;
+      height: 25px;
+      object-fit: contain;
+    }
+  }
+
   img {
-    width: 35px;
-    height: 35px;
-    object-fit: contain;
+    width: 38px;
+    height: 38px;
+    margin: 0 4px;
   }
 `;
 
