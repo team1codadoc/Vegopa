@@ -7,7 +7,7 @@ import { FaAngleLeft, FaBars } from "react-icons/fa";
 import { GiPartyPopper } from "react-icons/gi";
 import { RiSearchEyeLine } from "react-icons/ri";
 
-import { EatTogetherMap } from "../components/EatTogetherMap";
+import { Map } from "../components/map";
 
 const Wrapper = styled.section`
   background: white;
@@ -18,12 +18,11 @@ const Wrapper = styled.section`
 
 const Container = styled.div`
   width: 394px;
-  height: 670px;
+  height: 660px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  border: 2px solid rgba(0,0,0,0.7);
   position: relative;
   overflow: hidden;
 `;
@@ -113,6 +112,11 @@ const IconBox = styled.div`
   }
 `;
 
+const MapContainer = styled.div`
+  width: inherit;
+  height: 80%;
+`;
+
 const NavBar = styled.div`
   width: inherit;
   height: 120px;
@@ -150,21 +154,19 @@ const EatTogether = () => {
         </StatusBar>
         <HeaderLayer />
         <Header>
-          <HeaderColumn><IconBox><FaAngleLeft /></IconBox><IconBox><FaBars /></IconBox></HeaderColumn>
+          <a href="/">
+            <HeaderColumn><IconBox><FaAngleLeft /></IconBox><IconBox><FaBars /></IconBox></HeaderColumn>
+          </a>
           <HeaderColumn><Title>Vegopa</Title></HeaderColumn>
         </Header>
-        <h4>같이 티라미수 조지러 갈 사람~</h4>
-        <h1>Map</h1>
-        < EatTogetherMap />
+        <MapContainer>
+          <Map />
+        </MapContainer>
         <NavBar>
-          {/* 같은 음식 먹고 싶은 사람 찾기 버튼*/}
-          <a href="/together/search">
-            <NavIconBox><RiSearchEyeLine /></NavIconBox>
-          </a>
           {/* 내가 팟 열기 버튼*/}
-          <a href="/together/party">
-            <NavIconBox><GiPartyPopper /></NavIconBox>
-          </a>
+          <NavIconBox><GiPartyPopper /></NavIconBox>
+          {/* 같은 음식 먹고 싶은 사람 찾기 버튼*/}
+          <NavIconBox><RiSearchEyeLine /></NavIconBox>
         </NavBar>
       </Container>
     </Wrapper>
