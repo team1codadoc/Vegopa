@@ -1,30 +1,47 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import styled from "styled-components";
 import { ReactComponent as Icon } from "../../icon/retry.svg";
 import chainIcon from "/assets/chain_icon.png";
 import kakaoIcon from "/assets/kakao_icon.png";
 import facebookIcon from "/assets/facebook_icon.png";
 import twitterIcon from "/assets/twitter_icon.png";
+import { MbtiContext } from "../../store/MbtiContext";
+import { useNavigate } from "react-router-dom";
+import { mbtiQuestion, mbtiQuestionType } from "../../Constant/constant";
 
 export const MbtiResultPage = () => {
+  const context = useContext(MbtiContext);
+  const navigate = useNavigate();
+
+  const ans: mbtiQuestionType[] = [];
+  mbtiQuestion.forEach((v, i) => {
+    ans.push(v.selects.find((v) => v.id === context.answerIds[i]));
+  });
+  console.log(ans);
+  useEffect(() => {
+    if (context.answerIds.some((v) => v === undefined)) {
+      navigate("/select/1", { replace: true });
+    }
+  }, []);
+
   return (
     <ResultPageWrapper>
       <ResultPage>
         <CircleWrapper>
-          <Circle className="Circle1">딱</Circle>
-          <Circle className="Circle2">민</Circle>
-          <Circle className="Circle3">부</Circle>
-          <Circle className="Circle4">물</Circle>
+          {ans.map((v, i) => (
+            <Circle key={v.short} className={`Circle${i + 1}`}>
+              {v.short}
+            </Circle>
+          ))}
         </CircleWrapper>
         <MbtiResultText>
-          딱복먹는 아싸, 남들하고 어울리기보다는 집에 &quot;딱 &quot; 박혀있어서 혼자있는 시간을 좋아하는 군요!친구들과
-          같이 먹기보다는 혼밥을 좋아하는 사람! <br /> <br />
-          개성있는 민초를 좋아하는 당신, 감성적이며 자유로운 상상, 개방적 사고에 뛰어납니다! 밥을 먹을때 가게의 분위기를
-          중요시 여기는군요! <br /> <br />
-          근.본. 부먹을 선택한 당신 ,눅눅하고 원칙적인것을 좋아하 합니다. 고집이 있는편이나 결정을 잘내리는 편입니다.
-          보통 친구들끼리 메뉴를 정할떄 주체가 되는 사람입니다. <br /> <br />
-          물냉을 선택한 당신, 삼시세끼를 자기전에 정하시는 분이군요! 메뉴를 고를떄 체계적인 편입니다. 시간은 오래 걸릴
-          수 있으나 물냉러들이 골라주는 메뉴는 열에 아홉은 성공하는편입니다. <br /> <br />
+          {ans.map((v, i) => (
+            <>
+              <span key={v.short}>{v.contents}</span>
+              <br />
+              <br />
+            </>
+          ))}
         </MbtiResultText>
         <AgainWrapper>
           <AgainButton>
@@ -102,8 +119,12 @@ const MbtiResultText = styled.div`
   font-size: 16px;
   line-height: 24px;
   height: 230px;
+
   overflow-y: scroll;
   margin-bottom: 16px;
+  span {
+    word-break: keep-all;
+  }
 `;
 
 const AgainWrapper = styled.div`

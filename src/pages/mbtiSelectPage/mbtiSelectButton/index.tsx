@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { MbtiContext } from "../../../store/MbtiContext";
 
 interface props {
   text: string;
@@ -11,8 +12,9 @@ interface props {
 
 const MbtiSelectButton = ({ text, nextPage, id, endPage }: props) => {
   const navigate = useNavigate();
-
+  const context = useContext(MbtiContext);
   const selectClickHandler = () => {
+    context.setAnswer(id, nextPage - 2);
     if (nextPage === endPage) {
       navigate("/select/result");
     } else {
