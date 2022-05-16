@@ -4,6 +4,7 @@ import foodImage from "/assets/food/민초치킨.jpeg";
 import { FcShop } from "react-icons/fc";
 import Spinner from "../components/Spinner";
 import SnsShare from "../components/Sns-Share";
+import { Link } from "react-router-dom";
 
 const ChoicResult = () => {
   const [loading, setLoading] = useState(true);
@@ -16,11 +17,13 @@ const ChoicResult = () => {
         <Comment>어때요?</Comment>
       </TextContainer>
       <ImageWrapper>{loading ? <Spinner /> : <FoodImage src={foodImage} alt="food" />}</ImageWrapper>
-      <Button type="button">
-        <FcShop size="24" />
-        <span className="ir">근처 맛집보기 버튼</span>
-        <span>맛집 알아보기</span>
-      </Button>
+      <Link to={"/restaurant"}>
+        <Button type="button">
+          <FcShop size="24" />
+          <span className="ir">근처 맛집보기 버튼</span>
+          <span>맛집 알아보기</span>
+        </Button>
+      </Link>
 
       <SnsShare />
     </Container>
