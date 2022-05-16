@@ -11,7 +11,6 @@ interface props {
 
 const MbtiSelectButton = ({ text, nextPage, id, endPage }: props) => {
   const navigate = useNavigate();
-  const [click, setClick] = useState(false);
 
   const selectClickHandler = () => {
     if (nextPage === endPage) {
@@ -20,21 +19,12 @@ const MbtiSelectButton = ({ text, nextPage, id, endPage }: props) => {
       navigate(`/select/${nextPage}`);
     }
   };
-  return (
-    <SelectButton click={click} onClick={selectClickHandler}>
-      {text}
-    </SelectButton>
-  );
+  return <SelectButton onClick={selectClickHandler}>{text}</SelectButton>;
 };
 
 export default MbtiSelectButton;
 
-const SelectButton = styled.button<{ click: boolean }>`
-  a {
-    display: block;
-    width: 100%;
-    height: 100%;
-  }
+const SelectButton = styled.button`
   width: 100%;
   padding: 16px 0;
   border: 3px solid ${({ theme }) => theme.colors.GREY_COLOR};
@@ -42,6 +32,4 @@ const SelectButton = styled.button<{ click: boolean }>`
   font-size: 20px;
   margin-bottom: 77px;
   transition: all 300ms ease-in-out;
-
-  background: ${({ theme, click }) => (click ? theme.colors.GREY_COLOR : theme.colors.WHITE_COLOR)};
 `;
