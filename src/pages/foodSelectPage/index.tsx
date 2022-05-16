@@ -85,6 +85,7 @@ const QuestionText = styled.h1`
   font-weight: 700;
   margin-top: 16px;
   margin-bottom: 48px;
+  line-height: 24px;
 `;
 
 const SelectPageWrapper = styled.div`
