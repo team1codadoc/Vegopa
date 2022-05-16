@@ -16,9 +16,9 @@ const MbtiSelectButton = ({ text, nextPage, id, endPage }: props) => {
   const selectClickHandler = () => {
     context.setAnswer(id, nextPage - 2);
     if (nextPage === endPage) {
-      navigate("/select/result");
+      navigate("/select/loading");
     } else {
-      navigate(`/select/${nextPage}`);
+      setTimeout(() => navigate(`/select/${nextPage}`), 300);
     }
   };
   return <SelectButton onClick={selectClickHandler}>{text}</SelectButton>;
@@ -34,4 +34,7 @@ const SelectButton = styled.button`
   font-size: 20px;
   margin-bottom: 77px;
   transition: all 300ms ease-in-out;
+  &:focus {
+    background-color: ${({ theme }) => theme.colors.GREY_COLOR};
+  }
 `;
