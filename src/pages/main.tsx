@@ -56,7 +56,7 @@ const Arrow = styled.div`
   width: 100%;
   display: flex;
   justify-content: flex-end;
-  margin-right: 70px;
+  margin-right: 40px;
   font-size: x-large;
 `;
 
@@ -65,7 +65,7 @@ const MainChoice = () => {
     <Wrapper>
       <Container>
         <Button>
-          <a href="/solo">
+          <a href="/method">
             <Title>혼밥</Title>
             <Arrow><FaAngleRight /></Arrow>
             <Text>혼자 드시는 </Text>

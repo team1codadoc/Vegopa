@@ -8,6 +8,7 @@ import { MbtiLoading } from "../pages/mbtiResultPage/MbtiLoading";
 import Restaurant from "../pages/restaurant";
 import MainChoice from "../pages/main";
 import MethodChoice from "../pages/method";
+import EatTogether from "../pages/together";
 
 const RootRoute = () => {
   return (
@@ -21,6 +22,7 @@ const RootRoute = () => {
         <Route path="/select/:problem" element={<MbtiSelectPage />} />
         <Route path="/soloEat/:problem" element={<FoodSelectPage />} />
         <Route path="/method" element={<MethodChoice />} />
+        <Route path="/together" element={<EatTogether />} />
       </Routes>
     </BrowserRouter>
   );

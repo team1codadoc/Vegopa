@@ -88,8 +88,8 @@ export const Map = () => {
 
   // 지도 사이즈 관련 스타일
   const mapStyle = {
-    width: "100vw",
-    height: "100vh",
+    width: "390px",
+    height: "380px",
   };
 
   return (
@@ -113,7 +113,7 @@ export const Map = () => {
 const PlaceInfo = styled.div`
   position: absolute;
   background-color: #ffffff;
-  bottom: 110px;
+  bottom: 24px;
   z-index: 1;
   width: 100%;
   padding: 24px;
