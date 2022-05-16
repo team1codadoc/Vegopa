@@ -152,17 +152,18 @@ const Foodimg = styled.div`
   }
 `;
 
-const RecommendButton = styled.div`
-  -webkit-box-shadow: 5px 5px 15px 5px #000000;
-  box-shadow: 5px 5px 15px 5px #000000;
-  width: 201px;
-  height: 78px;
+const RecommendButton = styled.button`
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  width: 200px;
+  height: 58px;
   border-radius: 20px;
   margin: auto;
   background-color: #f1f1f1;
-  line-height: 78px;
   text-align: center;
-  font-size: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
   font-weight: bold;
   font-family: "SBAggroB";
 `;
