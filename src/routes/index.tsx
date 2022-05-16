@@ -14,7 +14,6 @@ const RootRoute = () => {
         <Route path="/" element={<Main />} />
         <Route path="/select/result" element={<MbtiResultPage />} />
         <Route path="/select/loading" element={<MbtiLoading />} />
-
         <Route path="/soloEat/result" element={<GameResult />} />
         <Route path="/select/:problem" element={<MbtiSelectPage />} />
         <Route path="/food/:problem" element={<FoodSelectPage />} />
