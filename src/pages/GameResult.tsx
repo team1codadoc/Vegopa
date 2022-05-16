@@ -1,12 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import foodImage from "/assets/food/민초치킨.jpeg";
 import { FcShop } from "react-icons/fc";
-import kakaoIcon from "/assets/kakao_icon.png";
-import facebookIcon from "/assets/facebook_icon.png";
-import twitterIcon from "/assets/twitter_icon.png";
+import Spinner from "../components/Spinner";
+import SnsShare from "../components/Sns-Share";
 
 const ChoicResult = () => {
+  const [loading, setLoading] = useState(true);
   return (
     <Container>
       <h1 className="ir">골라줘 결과 사이트</h1>
@@ -15,23 +15,14 @@ const ChoicResult = () => {
         <Title>민초 치킨</Title>
         <Comment>어때요?</Comment>
       </TextContainer>
-      <ImageWrapper>
-        <FoodImage src={foodImage} alt="food" />
-      </ImageWrapper>
+      <ImageWrapper>{loading ? <Spinner /> : <FoodImage src={foodImage} alt="food" />}</ImageWrapper>
       <Button type="button">
         <FcShop size="24" />
         <span className="ir">근처 맛집보기 버튼</span>
         <span>맛집 알아보기</span>
       </Button>
 
-      <ShareContianer>
-        <div className="copy-link">
-          <img src="/assets/chain_icon.png" alt="share link" />
-        </div>
-        <img className="share-kakao" src={kakaoIcon} alt="kakao-share" />
-        <img className="share-facebook" src={facebookIcon} alt="facebook-share" />
-        <img className="share-twitter" src={twitterIcon} alt="twitter-share" />
-      </ShareContianer>
+      <SnsShare />
     </Container>
   );
 };
@@ -69,12 +60,16 @@ const Title = styled.h2`
 const Comment = styled.h3``;
 
 const ImageWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   max-width: 200px;
-  min-height: 228px;
-  border-radius: 8px;
+  min-height: 196px;
+  border-radius: 20px;
   overflow: hidden;
   margin: 20px 0;
+  background-color: ${({ theme }) => theme.colors.LIGHT_GREY};
 `;
 
 const FoodImage = styled.img`
@@ -95,33 +90,6 @@ const Button = styled.button`
   span {
     padding: 5px;
     margin-bottom: -2px;
-  }
-`;
-
-const ShareContianer = styled.div`
-  width: 212px;
-  height: 50px;
-  margin-top: 50px;
-  display: flex;
-  justify-content: center;
-  .copy-link {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 38px;
-    height: 38px;
-    background-color: #f1f1f1;
-    margin: 0 5px;
-    img {
-      width: 25px;
-      height: 25px;
-      object-fit: contain;
-    }
-  }
-  img {
-    width: 38px;
-    height: 38px;
-    margin: 0 4px;
   }
 `;
 
