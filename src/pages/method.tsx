@@ -6,8 +6,6 @@ import { FaAngleRight } from "react-icons/fa";
 import heehee from "../img/charHeeHee.png";
 
 const Wrapper = styled.section`
-  padding: 4em;
-  min-height: 100vh;
   background: white;
   display: flex;
   justify-content: center;
@@ -16,13 +14,11 @@ const Wrapper = styled.section`
 
 const Container = styled.div `
   width: 394px;
-  height: 785px;
-  border-radius: 20px;
+  height: 670px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  border: 1px solid rgba(0,0,0,0.7);
 `;
 
 const Button = styled.div`

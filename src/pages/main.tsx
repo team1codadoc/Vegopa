@@ -5,8 +5,6 @@ import { FaAngleRight } from "react-icons/fa";
 import eating from "../img/charEating.png";
 
 const Wrapper = styled.section`
-  padding: 4em;
-  min-height: 100vh;
   background: white;
   display: flex;
   justify-content: center;
@@ -15,13 +13,11 @@ const Wrapper = styled.section`
 
 const Container = styled.div `
   width: 394px;
-  height: 785px;
-  border-radius: 20px;
+  height: 670px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  border: 1px solid rgba(0,0,0,0.7);
 `;
 
 const Button = styled.div`
@@ -69,17 +65,21 @@ const MainChoice = () => {
     <Wrapper>
       <Container>
         <Button>
-          <Title>혼밥</Title>
-          <Arrow><FaAngleRight /></Arrow>
-          <Text>혼자 드시는 </Text>
-          <Text>당신을 위해!</Text>
+          <a href="/solo">
+            <Title>혼밥</Title>
+            <Arrow><FaAngleRight /></Arrow>
+            <Text>혼자 드시는 </Text>
+            <Text>당신을 위해!</Text>
+          </a>
         </Button>
         <Img src={eating} />
         <Button>
-          <Title>같이</Title>
-          <Arrow><FaAngleRight /></Arrow>
-          <Text>함께 먹을 친구</Text>
-          <Text>구하러 가기!</Text>
+          <a href="/together">
+            <Title>같이</Title>
+            <Arrow><FaAngleRight /></Arrow>
+            <Text>함께 먹을 친구</Text>
+            <Text>구하러 가기!</Text>
+          </a>
         </Button>
       </Container>
     </Wrapper>
