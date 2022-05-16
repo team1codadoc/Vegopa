@@ -62,8 +62,6 @@ export const Map = () => {
             });
             kakao.maps.event.addListener(marker, "click", function () {
               setSelectedPlace(place);
-
-              console.log(place);
             });
           }
         },
@@ -82,14 +80,10 @@ export const Map = () => {
     getLocation();
   }, []);
 
-  const onClickButtonHandler = () => {
-    navigate(selectedPlace.place_url);
-  };
-
   // 지도 사이즈 관련 스타일
   const mapStyle = {
-    width: "390px",
-    height: "380px",
+    width: "100%",
+    height: "100vh",
   };
 
   return (
@@ -97,12 +91,13 @@ export const Map = () => {
       <div ref={mapRef} style={mapStyle}></div>
       {selectedPlace && (
         <PlaceInfo>
-          <p>{selectedPlace.place_name}</p>
-          <p>{selectedPlace.road_address_name}</p>
-          <p>{selectedPlace.phone}</p>
+          <PlaceName>{selectedPlace.place_name}</PlaceName>
+          <hr></hr>
+          <PlaceDetail>{selectedPlace.road_address_name}</PlaceDetail>
+          <PlaceDetail>{selectedPlace.phone}</PlaceDetail>
 
           <a href={selectedPlace.place_url}>
-            <button>카카오 지도로 가기</button>
+            <StyleBtn>카카오 지도로 보기</StyleBtn>
           </a>
         </PlaceInfo>
       )}
@@ -113,9 +108,26 @@ export const Map = () => {
 const PlaceInfo = styled.div`
   position: absolute;
   background-color: #ffffff;
-  bottom: 24px;
+  bottom: 15vh;
   z-index: 1;
   width: 100%;
   padding: 24px;
   border-radius: 16px;
+`;
+const PlaceName = styled.div`
+  font-size: 1.3rem;
+`;
+const PlaceDetail = styled.div`
+  font-size: 1.1rem;
+  margin-bottom: 1vh;
+`;
+const StyleBtn = styled.button`
+  width: 100%;
+  padding: 16px 0;
+  border: 3px solid ${({ theme }) => theme.colors.GREY_COLOR};
+  background-color: #f9e000;
+  border-radius: 10px;
+  font-size: 20px;
+  margin-bottom: 10px;
+  transition: all 300ms ease-in-out;
 `;
