@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { mbtiQuestion } from "../../Constant/constant";
@@ -7,7 +7,11 @@ import Navbar from "./navbar/Navbar";
 
 const MbtiSelectPage = () => {
   const location = useLocation();
-  const presentQuestion = +location.pathname.split("/")[2];
+  const question = +location.pathname.split("/")[2] - 1;
+  const [presentQuestion, setQuestion] = useState(question);
+  useEffect(() => {
+    setQuestion(question + 1);
+  }, [location]);
 
   return (
     <SelectPageWrapper>
@@ -18,9 +22,9 @@ const MbtiSelectPage = () => {
           <ProgressedBar presentWidth={(presentQuestion / 4) * 100} />
         </Bar>
       </ProgressBar>
-      <QuestionText>둘중에 마음에 드는 하나를 골라주세요!</QuestionText>
+      <QuestionText>둘 중에 마음에 드는 하나를 골라주세요!</QuestionText>
       <SelectWrapper>
-        {mbtiQuestion[presentQuestion - 1].selects.map(({ text, id }) => (
+        {mbtiQuestion[question].selects.map(({ text, id }) => (
           <MbtiSelectButton key={id} endPage={5} nextPage={presentQuestion + 1} {...{ id, text }} />
         ))}
       </SelectWrapper>
@@ -64,4 +68,5 @@ const ProgressedBar = styled.div<{ presentWidth: number }>`
   width: ${({ presentWidth }) => `${presentWidth}%`};
   height: 100%;
   background-color: ${({ theme }) => theme.colors.GREY_COLOR};
+  transition: 500ms;
 `;
