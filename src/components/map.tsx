@@ -113,7 +113,7 @@ export const Map = () => {
 const PlaceInfo = styled.div`
   position: absolute;
   background-color: #ffffff;
-  bottom: 24px;
+  bottom: 110px;
   z-index: 1;
   width: 100%;
   padding: 24px;
