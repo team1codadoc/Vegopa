@@ -1,11 +1,13 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { ReactComponent as Icon } from "../../../icon/chevron-left.svg";
 
 const Navbar = () => {
+  const navigate = useNavigate();
   return (
     <NavbarWrapper>
-      <BackButton>
+      <BackButton onClick={() => navigate(-1)}>
         <Icon />
       </BackButton>
       <div>

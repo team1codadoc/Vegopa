@@ -17,7 +17,6 @@ export const MbtiResultPage = () => {
   mbtiQuestion.forEach((v, i) => {
     ans.push(v.selects.find((v) => v.id === context.answerIds[i]));
   });
-  console.log(ans);
   useEffect(() => {
     if (context.answerIds.some((v) => v === undefined)) {
       navigate("/select/1", { replace: true });
@@ -36,12 +35,12 @@ export const MbtiResultPage = () => {
         </CircleWrapper>
         <MbtiResultText>
           {ans.map((v, i) => (
-            <>
+            <div key={i}>
               <h3 className={`color${i}`}>{v.title}</h3>
-              <span key={v.short}>{v.contents}</span>
+              <span>{v.contents}</span>
               <br />
               <br />
-            </>
+            </div>
           ))}
         </MbtiResultText>
       </ResultPage>
@@ -123,13 +122,12 @@ const Circle = styled.div`
 `;
 
 const MbtiResultText = styled.div`
-  /* border: 8px solid ${({ theme }) => theme.colors.LIGHT_GREY}; */
+  background-color: 8px solid ${({ theme }) => theme.colors.LIGHT_GREY};
   border-radius: 20px;
   padding: 30px 20px;
   font-size: 16px;
   line-height: 24px;
   font-weight: 400;
-  /* overflow-y: scroll; */
   margin-bottom: 16px;
   text-align: start;
   h3 {
