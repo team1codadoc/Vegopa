@@ -17,10 +17,6 @@ interface Loading {
 const Loading = styled.div<Loading>`
   width: ${(props) => props.size || "3rem"};
   height: ${(props) => props.size || "3rem"};
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   animation: loading 1.1s infinite linear;
   border-radius: 50%;
   border: 5px solid;
