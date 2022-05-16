@@ -51,7 +51,8 @@ export const MbtiResultPage = () => {
 
 export default MbtiResultPage;
 const ResultPageWrapper = styled.div`
-padding: 50px 60px;
+padding: 40px 60px;
+text-align: center;
 `;
 
 const ResultPage = styled.div`
@@ -81,6 +82,7 @@ font-weight: bold;
 const CircleWrapper = styled.div`
 display: flex;
 margin-bottom: 42px;
+justify-content: center;
 `;
 
 const Circle = styled.div`
@@ -97,7 +99,7 @@ box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 const MbtiResultText = styled.div`
 font-size: 16px;
 line-height: 24px;
-height: 276px;
+height: 230px;
 overflow-y: scroll;
 margin-bottom: 16px;
 `;
@@ -137,9 +139,14 @@ const Foodimg = styled.div`
 text-align: center;
 font-family: "SBAggroB";
 margin-bottom: 10px;
+div{
+  margin-bottom: 10px;
+}
+
 img{
   width: 100px;
   height: 100px;
+  border-radius: 20px;
 }
 `;
 
