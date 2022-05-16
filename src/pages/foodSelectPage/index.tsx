@@ -1,13 +1,13 @@
-import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import FoodSelectButton from "./foodSelectButton";
-import MbtiSelectButton from "./foodSelectButton";
 import Navbar from "./navbar/Navbar";
 
 const foodQuestion = [
   {
     question: "어떤 음식을 더 좋아하세요 최대 4가지를 선택해주세요",
+    answerNumber: 4,
     selects: [
       { text: "연어회", id: 1, selected: false },
       { text: "삼겹살", id: 2, selected: false },
@@ -21,40 +21,67 @@ const foodQuestion = [
       { text: "족발", id: 10, selected: false },
     ],
   },
+  {
+    question: "어떤 음식을 먹고 싶으신가요? 최대 2가지를 선택해주세요",
+    answerNumber: 2,
+    selects: [
+      { text: "한식", id: 1, selected: false },
+      { text: "중식", id: 2, selected: false },
+      { text: "일식", id: 3, selected: false },
+      { text: "패스트 푸드", id: 4, selected: false },
+      { text: "야식", id: 5, selected: false },
+      { text: "분식", id: 6, selected: false },
+    ],
+  },
 ];
 
 const FoodSelectPage = () => {
   const location = useLocation();
-  const presentQuestion = +location.pathname.split("/")[2];
-  const [question, setQuestion] = useState(foodQuestion[0].selects);
+  const navigator = useNavigate();
+  const questionNum = +location.pathname.split("/")[2] - 1;
+  const { answerNumber, selects } = foodQuestion[questionNum];
+  const [presentQuestion, setQuestionNum] = useState(questionNum);
+  const [question, setQuestion] = useState(selects);
+
+  useEffect(() => {
+    setQuestion(selects);
+    setQuestionNum(questionNum + 1);
+  }, [location]);
+
   const setSelectedQuestion = (number: number) => {
     const { id, text, selected } = question[number - 1];
-    if (question.filter(({ selected }) => selected).length < 4 && !selected) {
+    if (question.filter(({ selected }) => selected).length < answerNumber && !selected) {
       setQuestion([...question.slice(0, number - 1), { id, text, selected: !selected }, ...question.slice(number)]);
     }
 
     if (selected)
       setQuestion([...question.slice(0, number - 1), { id, text, selected: !selected }, ...question.slice(number)]);
   };
-
+  const NextButtonHandler = () => {
+    if (questionNum + 1 === foodQuestion.length) {
+      navigator("/soloEat/result");
+    } else {
+      navigator(`/soloEat/${questionNum + 2}`);
+    }
+  };
   return (
     <SelectPageWrapper>
       <FoodSelectMain>
         <Navbar />
         <ProgressBar>
-          <span>{presentQuestion}/2</span>
+          <span>{questionNum + 1}/2</span>
           <Bar>
             <ProgressedBar presentWidth={(presentQuestion / 2) * 100} />
           </Bar>
         </ProgressBar>
-        <QuestionText>{foodQuestion[0].question}</QuestionText>
+        <QuestionText>{foodQuestion[questionNum].question}</QuestionText>
         <SelectWrapper>
           {question.map(({ text, id, selected }) => (
             <FoodSelectButton key={id} {...{ selected, text, id, setSelectedQuestion }} />
           ))}
         </SelectWrapper>
       </FoodSelectMain>
-      <NextButton>다음</NextButton>
+      <NextButton onClick={NextButtonHandler}>다음</NextButton>
     </SelectPageWrapper>
   );
 };
@@ -114,4 +141,5 @@ const ProgressedBar = styled.div<{ presentWidth: number }>`
   width: ${({ presentWidth }) => `${presentWidth}%`};
   height: 100%;
   background-color: ${({ theme }) => theme.colors.GREY_COLOR};
+  transition: 300ms;
 `;

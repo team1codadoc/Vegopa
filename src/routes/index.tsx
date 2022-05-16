@@ -16,7 +16,7 @@ const RootRoute = () => {
         <Route path="/select/loading" element={<MbtiLoading />} />
         <Route path="/soloEat/result" element={<GameResult />} />
         <Route path="/select/:problem" element={<MbtiSelectPage />} />
-        <Route path="/food/:problem" element={<FoodSelectPage />} />
+        <Route path="/soloEat/:problem" element={<FoodSelectPage />} />
       </Routes>
     </BrowserRouter>
   );
