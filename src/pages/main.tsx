@@ -1,89 +1,98 @@
 import React from "react";
 import styled from "styled-components";
-
+import Logo from "/assets/vegopa.png";
 import { FaAngleRight } from "react-icons/fa";
-import eating from "../img/charEating.png";
+import { Link } from "react-router-dom";
 
-const Wrapper = styled.section`
-  background: white;
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+const LogoWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 100px 0 60px 0;
 `;
 
-const Container = styled.div `
-  width: 394px;
-  height: 670px;
+const Header = styled.div`
+  align-self: end;
+  padding: 25px 10px;
+  h2 {
+    font-size: 1.75rem;
+    font-weight: 500;
+  }
+
+  .roulette {
+    margin-top: 13px;
+    font-size: 12px;
+    font-weight: 400;
+  }
+`;
+
+const MenuRecommendBtn = styled.button`
+  width: 175px;
+  height: 48px;
+  border-radius: 20px;
+  font-size: 1.2rem;
+  background-color: ${({ theme }) => theme.colors.DARK_GRAY};
+`;
+
+const Bottom = styled.div`
+  position: fixed;
+  bottom: 15px;
+  left: 15px;
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
   align-items: center;
 `;
 
-const Button = styled.div`
-  width: 65%;
-  height: 140px;
-  border-radius: 10px;
-  background: #F1F1F1;
+const MbTI = styled.button`
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  &:first-child {
-    margin-top: 40px;
-  }
-  &:last-child {
-    margin-bottom: 40px;
-  }
 `;
 
-const Title = styled.div`
-  font-size: 2.5em;
-  font-weight: bold;
-  text-align: center;
-`;
-
-const Text = styled.p`
-  font-size: 1em;
-  coloR: rgba(0,0,0,0.3);
-  line-height: 23px;
-`;
-
-const Img = styled.img`
-`;
-
-const Arrow = styled.div`
-  width: 100%;
+const StyledLink = styled(Link)`
   display: flex;
-  justify-content: flex-end;
-  margin-right: 40px;
-  font-size: x-large;
+  align-items: center;
 `;
 
-const MainChoice = () => {
+const RouletteLink = styled(Link)`
+  color: ${({ theme }) => theme.colors.BLACK_COLOR};
+  span {
+    font-size: 12px;
+    margin-top: 10px;
+    display: block;
+  }
+`;
+
+const Main = () => {
   return (
-    <Wrapper>
-      <Container>
-        <Button>
-          <a href="/method">
-            <Title>혼밥</Title>
-            <Arrow><FaAngleRight /></Arrow>
-            <Text>혼자 드시는 </Text>
-            <Text>당신을 위해!</Text>
-          </a>
-        </Button>
-        <Img src={eating} />
-        <Button>
-          <a href="/together">
-            <Title>같이</Title>
-            <Arrow><FaAngleRight /></Arrow>
-            <Text>함께 먹을 친구</Text>
-            <Text>구하러 가기!</Text>
-          </a>
-        </Button>
-      </Container>
-    </Wrapper>
+    <Container>
+      <Header>
+        <RouletteLink to="/soloEat/result">
+          <h2>귀찮아...</h2>
+          <span>룰렛으로 추천받기</span>
+        </RouletteLink>
+      </Header>
+      <LogoWrapper>
+        <img src={Logo} alt="logo" />
+      </LogoWrapper>
+      <Link to="/mainChoice">
+        <MenuRecommendBtn type="button">메뉴 추천받기</MenuRecommendBtn>
+      </Link>
+      <Bottom>
+        <StyledLink to="/select/1">
+          <MbTI>
+            <p>밥먹기 전에 심심하면</p>
+            <p>음BTI 해볼래요?</p>
+          </MbTI>
+          <FaAngleRight size={23} />
+        </StyledLink>
+      </Bottom>
+    </Container>
   );
 };
 
-export default MainChoice;
+export default Main;
