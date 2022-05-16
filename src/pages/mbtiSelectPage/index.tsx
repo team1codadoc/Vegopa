@@ -1,35 +1,9 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
+import { mbtiQuestion } from "../../Constant/constant";
 import MbtiSelectButton from "./mbtiSelectButton";
 import Navbar from "./navbar/Navbar";
-
-const mbtiQuestion = [
-  {
-    selects: [
-      { text: "물렁 복숭아", id: "1" },
-      { text: "딱딱한 복숭아", id: "2" },
-    ],
-  },
-  {
-    selects: [
-      { text: "민트초코", id: "3" },
-      { text: "반민트초코", id: "4" },
-    ],
-  },
-  {
-    selects: [
-      { text: "탕수육 부먹", id: "5" },
-      { text: "탕수육 찍먹", id: "6" },
-    ],
-  },
-  {
-    selects: [
-      { text: "물냉면", id: "7" },
-      { text: "비빔냉면", id: "8" },
-    ],
-  },
-];
 
 const MbtiSelectPage = () => {
   const location = useLocation();
