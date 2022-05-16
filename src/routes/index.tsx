@@ -6,12 +6,14 @@ import GameResult from "../pages/GameResult";
 import MbtiResultPage from "../pages/mbtiResultPage";
 import MbtiSelectPage from "../pages/mbtiSelectPage";
 import { MbtiLoading } from "../pages/mbtiResultPage/MbtiLoading";
+import Restaurant from "../pages/restaurant";
 
 const RootRoute = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Main />} />
+        <Route path="/restaurant" element={<Restaurant />} />
         <Route path="/select/result" element={<MbtiResultPage />} />
         <Route path="/select/loading" element={<MbtiLoading />} />
         <Route path="/soloEat/result" element={<GameResult />} />
