@@ -1,8 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-
+import { Link } from "react-router-dom";
 import { FaAngleRight } from "react-icons/fa";
-
 import heehee from "../img/charHeeHee.png";
 
 const Wrapper = styled.section`
@@ -12,7 +11,7 @@ const Wrapper = styled.section`
   align-items: center;
 `;
 
-const Container = styled.div `
+const Container = styled.div`
   width: 394px;
   height: 670px;
   display: flex;
@@ -25,7 +24,7 @@ const Button = styled.div`
   width: 65%;
   height: 140px;
   border-radius: 10px;
-  background: #EAD1D1;
+  background: #ead1d1;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -48,12 +47,11 @@ const Title = styled.div`
 
 const Text = styled.p`
   font-size: 1em;
-  coloR: rgba(0,0,0,0.3);
+  color: rgba(0, 0, 0, 0.3);
   line-height: 23px;
 `;
 
-const Img = styled.img`
-`;
+const Img = styled.img``;
 
 const Arrow = styled.div`
   width: 100%;
@@ -68,17 +66,25 @@ const MethodChoice = () => {
   return (
     <Wrapper>
       <Container>
-        <Button>
-          <Title>골라줘!</Title>
-          <Arrow><FaAngleRight /></Arrow>
-          <Text>그냥 랜덤으로 추천해줘 </Text>
-        </Button>
+        <Link to="/soloEat/result">
+          <Button>
+            <Title>골라줘!</Title>
+            <Arrow>
+              <FaAngleRight />
+            </Arrow>
+            <Text>그냥 랜덤으로 추천해줘 </Text>
+          </Button>
+        </Link>
         <Img src={heehee} />
-        <Button>
-          <Title>고를래~</Title>
-          <Arrow><FaAngleRight /></Arrow>
-          <Text>내 취향대로 추천 받을래</Text>
-        </Button>
+        <Link to="/soloEat/1">
+          <Button>
+            <Title>고를래~</Title>
+            <Arrow>
+              <FaAngleRight />
+            </Arrow>
+            <Text>내 취향대로 추천 받을래</Text>
+          </Button>
+        </Link>
       </Container>
     </Wrapper>
   );
