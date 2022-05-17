@@ -1,8 +1,3 @@
----
-title: '배고파(Vegopa)'
-disqus: hackmd
----
-
 배고파(Vegopa)
 ===
 
@@ -11,7 +6,14 @@ disqus: hackmd
 
 ## 목차
 
-[TOC]
+- [배고파(Vegopa)](#----vegopa-)
+  * [목차](#--)
+  * [🎯 Project's Goal](#---project-s-goal)
+  * [📌 Getting Started](#---getting-started)
+  * [🛠 Dependency](#---dependency)
+  * [📈 User flows](#---user-flows)
+  * [🕠 Project Timeline](#---project-timeline)
+  * [🌈 Members](#---members)
 
 ## 🎯 Project's Goal
 
