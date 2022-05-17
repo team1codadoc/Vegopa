@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Spinner from "../../components/Spinner";
 import colors from "../../theme/colors";
 
-export const MbtiLoading = () => {
+const MbtiLoading = () => {
   const navigate = useNavigate();
   useEffect(() => {
     setTimeout(() => navigate("/select/result"), 2000);
@@ -51,3 +51,5 @@ const MbtiLoadingWrapper = styled.div`
     text-indent: -9999px;
   }
 `;
+
+export default MbtiLoading;
