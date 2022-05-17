@@ -6,14 +6,14 @@
 
 ## 목차
 
-- [배고파(Vegopa)](#----vegopa-)
-  * [목차](#--)
-  * [🎯 Project's Goal](#---project-s-goal)
-  * [📌 Getting Started](#---getting-started)
-  * [🛠 Dependency](#---dependency)
-  * [📈 User flows](#---user-flows)
-  * [🕠 Project Timeline](#---project-timeline)
-  * [🌈 Members](#---members)
+- [배고파(Vegopa)](#배고파vegopa)
+  * [목차](#목차)
+  * [🎯 Project's Goal](#-projects-goal)
+  * [📌 Getting Started](#-getting-started)
+  * [🛠 Dependency](#-dependency)
+  * [📈 User flows](#-user-flows)
+  * [🕠 Project Timeline](#-project-timeline)
+  * [🌈 Members](#-members)
 
 ## 🎯 Project's Goal
 
