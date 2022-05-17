@@ -1,9 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 
-const Spinner = () => {
+interface SpinnerProps {
+  color?: string;
+  innerColor?: string;
+}
+
+const Spinner = ({ color, innerColor }: SpinnerProps) => {
   return (
-    <Loading>
+    <Loading color={color} innerColor={innerColor}>
       <span className="ir">Loading ...</span>
     </Loading>
   );
