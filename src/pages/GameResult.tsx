@@ -7,6 +7,7 @@ import SnsShare from "../components/Sns-Share";
 import { Link } from "react-router-dom";
 
 const ChoicResult = () => {
+  const [isPlaying, setIsplaying] = useState(false);
   const [loading, setLoading] = useState(true);
   return (
     <Container>
