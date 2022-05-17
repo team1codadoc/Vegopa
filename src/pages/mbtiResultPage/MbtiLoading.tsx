@@ -13,13 +13,13 @@ export const MbtiLoading = () => {
   const spinnerColor = colors.BLACK_COLOR;
   const spinnerInnerColor = colors.GREY_COLOR;
   return (
-    <MbtiLoadingWarpper>
+    <MbtiLoadingWrapper>
       <Container>
         <h1 className="ir">결과 분석 페이지</h1>
         <LoadingTitle>결과 분석 중입니다.</LoadingTitle>
         <Spinner color={spinnerColor} innerColor={spinnerInnerColor} />
       </Container>
-    </MbtiLoadingWarpper>
+    </MbtiLoadingWrapper>
   );
 };
 
@@ -35,7 +35,7 @@ const LoadingTitle = styled.h2`
   font-family: "TmoneyRoundWindExtraBold";
 `;
 
-const MbtiLoadingWarpper = styled.div`
+const MbtiLoadingWrapper = styled.div`
   width: 100%;
   height: 100vh;
   display: flex;
