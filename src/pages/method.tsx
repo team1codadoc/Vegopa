@@ -21,7 +21,7 @@ const Container = styled.div`
 `;
 
 const Button = styled.div`
-  width: 65%;
+  width: 230px;
   height: 140px;
   border-radius: 10px;
   background: #ead1d1;

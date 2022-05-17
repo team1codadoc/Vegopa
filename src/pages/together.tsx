@@ -7,7 +7,7 @@ import { FaAngleLeft, FaBars } from "react-icons/fa";
 import { GiPartyPopper } from "react-icons/gi";
 import { RiSearchEyeLine } from "react-icons/ri";
 
-import { Map } from "../components/map";
+import { Map } from "../components/mapTogether";
 
 const Wrapper = styled.section`
   background: white;

@@ -4,11 +4,12 @@ import Logo from "/assets/vegopa.png";
 import { FaAngleRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-const Container = styled.div`
+const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
+
 const LogoWrapper = styled.div`
   display: flex;
   justify-content: center;
@@ -69,7 +70,7 @@ const RouletteLink = styled(Link)`
 
 const Main = () => {
   return (
-    <Container>
+    <Wrapper>
       <Header>
         <RouletteLink to="/soloEat/result">
           <h2>귀찮아...</h2>
@@ -91,7 +92,7 @@ const Main = () => {
           <FaAngleRight size={23} />
         </StyledLink>
       </Bottom>
-    </Container>
+    </Wrapper>
   );
 };
 
