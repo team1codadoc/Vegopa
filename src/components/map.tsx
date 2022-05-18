@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import Loading from "./loading";
+import home_icon from "/home_icon.png";
 
 declare global {
   interface Window {
@@ -28,25 +30,32 @@ export const Map = () => {
   const { kakao } = window;
   const mapRef = useRef<HTMLDivElement>(null);
   const [selectedPlace, setSelectedPlace] = useState<Place>();
+  const [isLoading, setIsLoading] = useState(false);
+  console.log(mapRef);
   const navigate = useNavigate();
   const getLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const container = mapRef.current;
+
           const options = {
             center: new kakao.maps.LatLng(position.coords.latitude, position.coords.longitude),
-            level: 4,
+            level: 5,
           };
+          if (position.coords.latitude) {
+            setIsLoading(true);
+          }
 
           const map = new kakao.maps.Map(container, options);
           const places = new kakao.maps.services.Places(map);
-
+          kakao.maps.event.addListener(map, "click", function () {
+            setSelectedPlace(null);
+          });
           places.keywordSearch(query, placesSearchCB, {
             useMapBounds: true,
           });
 
-          const infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
           function placesSearchCB(data, status, pagination) {
             if (status === kakao.maps.services.Status.OK) {
               for (let i = 0; i < data.length; i++) {
@@ -60,6 +69,7 @@ export const Map = () => {
               map: map,
               position: new kakao.maps.LatLng(place.y, place.x),
             });
+
             kakao.maps.event.addListener(marker, "click", function () {
               setSelectedPlace(place);
             });
@@ -88,19 +98,26 @@ export const Map = () => {
 
   return (
     <>
-      <div ref={mapRef} style={mapStyle}></div>
-      {selectedPlace && (
-        <PlaceInfo>
-          <PlaceName>{selectedPlace.place_name}</PlaceName>
-          <hr></hr>
-          <PlaceDetail>{selectedPlace.road_address_name}</PlaceDetail>
-          <PlaceDetail>{selectedPlace.phone}</PlaceDetail>
+      <HomeBtn>
+        <Link to="/">
+          <img src={home_icon} />
+        </Link>
+      </HomeBtn>
+      {mapRef.current === null ? <Loading /> : ""}
+      <div ref={mapRef} style={mapStyle}>
+        {selectedPlace && (
+          <PlaceInfo>
+            <PlaceName>{selectedPlace.place_name}</PlaceName>
+            <hr></hr>
+            <PlaceDetail>{selectedPlace.road_address_name}</PlaceDetail>
+            <PlaceDetail>{selectedPlace.phone}</PlaceDetail>
 
-          <a href={selectedPlace.place_url}>
-            <StyleBtn>카카오 지도로 보기</StyleBtn>
-          </a>
-        </PlaceInfo>
-      )}
+            <a href={selectedPlace.place_url}>
+              <StyleBtn>카카오 지도로 보기</StyleBtn>
+            </a>
+          </PlaceInfo>
+        )}
+      </div>
     </>
   );
 };
@@ -113,6 +130,20 @@ const PlaceInfo = styled.div`
   width: 100%;
   padding: 24px;
   border-radius: 16px;
+`;
+const HomeBtn = styled.div`
+  z-index: 10;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 3%;
+  left: 50%;
+  transform: translate(-50%);
+  background-color: white;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%; ;
 `;
 const PlaceName = styled.div`
   font-size: 1.3rem;
