@@ -75,6 +75,7 @@ const Main = () => {
         <RouletteLink to="/soloEat/result">
           <h2>귀찮아...</h2>
           <span>룰렛으로 추천받기</span>
+          <FaAngleRight size={23} />
         </RouletteLink>
       </Header>
       <LogoWrapper>
