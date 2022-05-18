@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Loading from "./loading";
 import home_icon from "/home_icon.png";
@@ -31,22 +31,19 @@ export const Map = () => {
   const mapRef = useRef<HTMLDivElement>(null);
   const [selectedPlace, setSelectedPlace] = useState<Place>();
   const [isLoading, setIsLoading] = useState(false);
-  console.log(mapRef);
-  const navigate = useNavigate();
+
   const getLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const container = mapRef.current;
-
           const options = {
             center: new kakao.maps.LatLng(position.coords.latitude, position.coords.longitude),
             level: 5,
           };
-          if (position.coords.latitude) {
+          if (container !== null) {
             setIsLoading(true);
           }
-
           const map = new kakao.maps.Map(container, options);
           const places = new kakao.maps.services.Places(map);
           kakao.maps.event.addListener(map, "click", function () {
@@ -88,14 +85,14 @@ export const Map = () => {
 
   useEffect(() => {
     getLocation();
-  }, []);
+  }, [mapRef]);
 
   // 지도 사이즈 관련 스타일
   const mapStyle = {
     width: "100%",
     height: "100vh",
   };
-
+  console.log(isLoading);
   return (
     <>
       <HomeBtn>
@@ -103,7 +100,7 @@ export const Map = () => {
           <img src={home_icon} />
         </Link>
       </HomeBtn>
-      {mapRef.current === null ? <Loading /> : ""}
+      {!isLoading ? <Loading /> : ""}
       <div ref={mapRef} style={mapStyle}>
         {selectedPlace && (
           <PlaceInfo>
