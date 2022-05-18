@@ -10,6 +10,16 @@ const Wrapper = styled.div`
   align-items: center;
 `;
 
+const Container = styled.div`
+  width: 394px;
+  height: 670px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+`;
+
 const LogoWrapper = styled.div`
   display: flex;
   justify-content: center;
@@ -17,19 +27,30 @@ const LogoWrapper = styled.div`
   margin: 100px 0 60px 0;
 `;
 
-const Header = styled.div`
+const IsLazy = styled.div`
+  position: absolute;
+  top: 25px;
+  right: 15px;
   align-self: end;
   padding: 25px 10px;
   h2 {
     font-size: 1.75rem;
     font-weight: 500;
   }
-
   .roulette {
     margin-top: 13px;
     font-size: 12px;
     font-weight: 400;
   }
+`;
+
+const Center = styled.div`
+  position: absolute;
+  top: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
 const MenuRecommendBtn = styled.button`
@@ -41,7 +62,7 @@ const MenuRecommendBtn = styled.button`
 `;
 
 const Bottom = styled.div`
-  position: fixed;
+  position: absolute;
   bottom: 15px;
   left: 15px;
   display: flex;
@@ -49,7 +70,7 @@ const Bottom = styled.div`
   align-items: center;
 `;
 
-const MbTI = styled.button`
+const MBTI = styled.button`
   display: flex;
   flex-direction: column;
 `;
@@ -64,35 +85,40 @@ const RouletteLink = styled(Link)`
   span {
     font-size: 12px;
     margin-top: 10px;
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 `;
 
 const Main = () => {
   return (
     <Wrapper>
-      <Header>
-        <RouletteLink to="/soloEat/result">
-          <h2>귀찮아...</h2>
-          <span>룰렛으로 추천받기</span>
-          <FaAngleRight size={23} />
-        </RouletteLink>
-      </Header>
-      <LogoWrapper>
-        <img src={Logo} alt="logo" />
-      </LogoWrapper>
-      <Link to="/mainChoice">
-        <MenuRecommendBtn type="button">메뉴 추천받기</MenuRecommendBtn>
-      </Link>
-      <Bottom>
-        <StyledLink to="/select/1">
-          <MbTI>
-            <p>밥먹기 전에 심심하면</p>
-            <p>음BTI 해볼래요?</p>
-          </MbTI>
-          <FaAngleRight size={23} />
-        </StyledLink>
-      </Bottom>
+      <Container>
+        <IsLazy>
+          <RouletteLink to="/soloEat/result">
+            <h2>귀찮아...</h2>
+            <span>룰렛으로 추천받기   <FaAngleRight size={23} /></span>
+          </RouletteLink>
+        </IsLazy>
+        <Center>
+          <LogoWrapper>
+            <img src={Logo} alt="logo" />
+          </LogoWrapper>
+          <Link to="/mainChoice">
+            <MenuRecommendBtn type="button">메뉴 추천받기</MenuRecommendBtn>
+          </Link>
+        </Center>
+        <Bottom>
+          <StyledLink to="/select/1">
+            <MBTI>
+              <p>밥먹기 전에 심심하면</p>
+              <p>음BTI 해볼래요?</p>
+            </MBTI>
+            <FaAngleRight size={23} />
+          </StyledLink>
+        </Bottom>
+      </Container>
     </Wrapper>
   );
 };

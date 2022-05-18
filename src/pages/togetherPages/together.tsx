@@ -4,8 +4,8 @@ import styled from "styled-components";
 import { GiPartyPopper } from "react-icons/gi";
 import { RiSearchEyeLine } from "react-icons/ri";
 
-import { Map } from "../../../components/mapTogether";
-import { HeaderComponent } from "../../../components/Header";
+import { Map } from "../../components/mapTogether";
+import { HeaderComponent } from "../../components/Header";
 
 const Wrapper = styled.section`
   background: white;

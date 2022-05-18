@@ -1,16 +1,16 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import FoodSelectPage from "../pages/foodSelectPage";
-import GameResult from "../pages/GameResult";
+import FoodSelectPage from "../pages/foodSelectPage/index";
+import ChoiceResult from "../pages/ChoiceResult";
 import MbtiResultPage from "../pages/mbtiResultPage";
 import MbtiSelectPage from "../pages/mbtiSelectPage";
 import MbtiLoading from "../pages/mbtiResultPage/MbtiLoading";
 import Restaurant from "../pages/Restaurant";
 import MainChoice from "../pages/MainChoice";
 import MethodChoice from "../pages/method";
-import EatTogether from "../pages/foodSelectPage/togetherPages/together";
-import UserSearch from "../pages/foodSelectPage/togetherPages/UserSearch";
-import StartGroup from "../pages/foodSelectPage/togetherPages/startGroup";
+import EatTogether from "../pages/togetherPages/together";
+import UserSearch from "../pages/togetherPages/UserSearch";
+import StartGroup from "../pages/togetherPages/startGroup";
 import Main from "../pages/main";
 import { HeaderComponent } from "../components/Header";
 
@@ -24,7 +24,7 @@ const RootRoute = () => {
         <Route path="/restaurant" element={<Restaurant />} />
         <Route path="/select/result" element={<MbtiResultPage />} />
         <Route path="/select/loading" element={<MbtiLoading />} />
-        <Route path="/soloEat/result" element={<GameResult />} />
+        <Route path="/soloEat/result" element={<ChoiceResult />} />
         <Route path="/select/:problem" element={<MbtiSelectPage />} />
         <Route path="/soloEat/:problem" element={<FoodSelectPage />} />
         <Route path="/method" element={<MethodChoice />} />
