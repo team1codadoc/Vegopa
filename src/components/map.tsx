@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import Loading from "./loading";
-import home_icon from "/home_icon.png";
+import Spinner from "./Spinner";
+import home_icon from "/assets/home_icon.png";
 
 declare global {
   interface Window {
@@ -100,7 +100,16 @@ export const Map = () => {
           <img src={home_icon} />
         </Link>
       </HomeBtn>
-      {!isLoading ? <Loading /> : ""}
+
+      {!isLoading ? (
+        <Loading>
+          <Spinner />
+          <p>지도 불러오는 중...</p>
+        </Loading>
+      ) : (
+        ""
+      )}
+
       <div ref={mapRef} style={mapStyle}>
         {selectedPlace && (
           <PlaceInfo>
@@ -121,7 +130,6 @@ export const Map = () => {
 
 const PlaceInfo = styled.div`
   position: absolute;
-  background-color: #ffffff;
   bottom: 3vh;
   z-index: 1;
   width: 100%;
@@ -137,10 +145,20 @@ const HomeBtn = styled.div`
   top: 3%;
   left: 50%;
   transform: translate(-50%);
-  background-color: white;
+  background-color: ${({ theme }) => theme.colors.WHITE_COLOR};
   width: 36px;
   height: 36px;
   border-radius: 50%; ;
+`;
+const Loading = styled.div`
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  p {
+    margin-top: 3%;
+  }
 `;
 const PlaceName = styled.div`
   font-size: 1.3rem;
@@ -153,7 +171,7 @@ const StyleBtn = styled.button`
   width: 100%;
   padding: 16px 0;
   border: 3px solid ${({ theme }) => theme.colors.GREY_COLOR};
-  background-color: #f9e000;
+  background-color: ${({ theme }) => theme.colors.KaKao_Yellow};
   border-radius: 10px;
   font-size: 20px;
   margin-bottom: 10px;
