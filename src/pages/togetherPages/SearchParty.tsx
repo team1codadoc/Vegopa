@@ -63,7 +63,7 @@ const Title = styled.h1`
   text-decoration: underline;
 `;
 
-const EatTogether = () => {
+const SearchParty = () => {
   return (
     <Wrapper>
       <Container>
@@ -85,4 +85,4 @@ const EatTogether = () => {
   );
 };
 
-export default EatTogether;
+export default SearchParty;

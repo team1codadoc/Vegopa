@@ -8,9 +8,10 @@ import MbtiLoading from "../pages/mbtiResultPage/MbtiLoading";
 import Restaurant from "../pages/Restaurant";
 import MainChoice from "../pages/MainChoice";
 import MethodChoice from "../pages/method";
-import EatTogether from "../pages/togetherPages/together";
-import UserSearch from "../pages/togetherPages/UserSearch";
-import StartGroup from "../pages/togetherPages/startGroup";
+import PartyChoice from "../pages/togetherPages/partyChoice";
+import SearchParty from "../pages/togetherPages/SearchParty";
+import SearchSuggested from "../pages/togetherPages/SearchSuggested";
+import JoinParty from "../pages/togetherPages/JoinParty";
 import Main from "../pages/main";
 import { HeaderComponent } from "../components/Header";
 
@@ -28,9 +29,10 @@ const RootRoute = () => {
         <Route path="/select/:problem" element={<MbtiSelectPage />} />
         <Route path="/soloEat/:problem" element={<FoodSelectPage />} />
         <Route path="/method" element={<MethodChoice />} />
-        <Route path="/together" element={<EatTogether />} />
-        <Route path="/together/search" element={<UserSearch />} />
-        <Route path="/together/startGroup" element={<StartGroup />} />
+        <Route path="/together/partyChoice" element={<PartyChoice />} />
+        <Route path="/together/searchParty" element={<SearchParty />} />
+        <Route path="/together/searchSuggested" element={<SearchSuggested />} />
+        <Route path="/together/joinParty" element={<JoinParty />} />
       </Routes>
     </BrowserRouter>
   );

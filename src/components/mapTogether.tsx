@@ -70,7 +70,7 @@ export const Map = () => {
             });
             marker.setMap(map);
             kakao.maps.event.addListener(marker, "click", function () {
-              setSelectedPlace(place);
+              <setSelectedPlace(place);> //onClick 으로 페이지 이동!
             });
           }
         },

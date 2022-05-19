@@ -1,7 +1,7 @@
 import React from "react";
 
-function StartGroup () {
+function JoinParty () {
   return (<h1>Start a group :) </h1>);
 }
 
-export default StartGroup;
+export default JoinParty;
