@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { FaAngleRight } from "react-icons/fa";
-import heehee from "../img/charHeeHee.png";
+import heehee from "../../img/charHeeHee.png";
 
 const Wrapper = styled.section`
   background: white;
@@ -62,11 +62,11 @@ const Arrow = styled.div`
   position: absolute;
 `;
 
-function PartyChoice () {
+function PartyChoice() {
   return (
     <Wrapper>
       <Container>
-        <Link to="/soloEat/result">
+        <Link to="#">
           <Button>
             <Title>내 파티</Title>
             <Arrow>
@@ -75,7 +75,7 @@ function PartyChoice () {
           </Button>
         </Link>
         <Img src={heehee} />
-        <Link to="/soloEat/1">
+        <Link to="/together/searchParty">
           <Button>
             <Title></Title>
             <Arrow>

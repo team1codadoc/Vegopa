@@ -23,7 +23,7 @@ type Place = {
   y: string;
 };
 
-export const Map = () => {
+export const MapTogether = () => {
   const query = "치킨";
   const { kakao } = window;
   const mapRef = useRef<HTMLDivElement>(null);
@@ -41,13 +41,10 @@ export const Map = () => {
 
           const map = new kakao.maps.Map(container, options);
           const places = new kakao.maps.services.Places(map);
-          const icon = new kakao.maps.MarkerImage(
-            "https://ifh.cc/g/aDMhy0.png",
-            new kakao.maps.Size(64, 68),{
-              shape: "poly",
-              coords: "16,0,20,2,24,6,26,10,26,16,23,22,17,25,14,35,13,35,9,25,6,24,2,20,0,16,0,10,2,6,6,2,10,0"
-            }
-          );
+          const icon = new kakao.maps.MarkerImage("https://ifh.cc/g/aDMhy0.png", new kakao.maps.Size(64, 68), {
+            shape: "poly",
+            coords: "16,0,20,2,24,6,26,10,26,16,23,22,17,25,14,35,13,35,9,25,6,24,2,20,0,16,0,10,2,6,6,2,10,0",
+          });
 
           places.keywordSearch(query, placesSearchCB, {
             useMapBounds: true,
@@ -66,11 +63,11 @@ export const Map = () => {
             const marker = new kakao.maps.Marker({
               map: map,
               position: new kakao.maps.LatLng(place.y, place.x),
-              image: icon
+              image: icon,
             });
             marker.setMap(map);
             kakao.maps.event.addListener(marker, "click", function () {
-              <setSelectedPlace(place);> //onClick 으로 페이지 이동!
+              setSelectedPlace(place);
             });
           }
         },

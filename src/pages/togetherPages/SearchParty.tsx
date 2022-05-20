@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { GiPartyPopper } from "react-icons/gi";
 import { RiSearchEyeLine } from "react-icons/ri";
 
-import { Map } from "../../components/mapTogether";
+import { MapTogether } from "../../components/mapTogether";
 import { HeaderComponent } from "../../components/Header";
 
 const Wrapper = styled.section`
@@ -48,7 +48,7 @@ const NavIconBox = styled.div`
   border-radius: 15px;
   margin-right: 10px;
   background: black;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
   color: white;
   font-size: 35px;
   display: flex;
@@ -70,14 +70,18 @@ const SearchParty = () => {
         <HeaderComponent />
         <Title> Vegopa </Title>
         <MapContainer>
-          <Map />
+          <MapTogether />
         </MapContainer>
         <NavBar>
-          <a href="/together/search">
-            <NavIconBox><GiPartyPopper /></NavIconBox>
+          <a href="/together/searchSuggested">
+            <NavIconBox>
+              <RiSearchEyeLine />
+            </NavIconBox>
           </a>
-          <a href="/together/startGroup">
-            <NavIconBox><RiSearchEyeLine /></NavIconBox>
+          <a href="/together/joinParty">
+            <NavIconBox>
+              <GiPartyPopper />
+            </NavIconBox>
           </a>
         </NavBar>
       </Container>

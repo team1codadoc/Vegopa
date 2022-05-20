@@ -8,7 +8,7 @@ import MbtiLoading from "../pages/mbtiResultPage/MbtiLoading";
 import Restaurant from "../pages/Restaurant";
 import MainChoice from "../pages/MainChoice";
 import MethodChoice from "../pages/method";
-import PartyChoice from "../pages/togetherPages/partyChoice";
+import PartyChoice from "../pages/togetherPages/PartyChoice";
 import SearchParty from "../pages/togetherPages/SearchParty";
 import SearchSuggested from "../pages/togetherPages/SearchSuggested";
 import JoinParty from "../pages/togetherPages/JoinParty";

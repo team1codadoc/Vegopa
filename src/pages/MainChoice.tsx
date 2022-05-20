@@ -75,7 +75,7 @@ const MainChoice = () => {
         </Button>
         <Img src={eating} />
         <Button>
-          <Link to="/together">
+          <Link to="/together/partyChoice">
             <Title>같이</Title>
             <Arrow>
               <FaAngleRight />
