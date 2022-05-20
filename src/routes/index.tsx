@@ -38,6 +38,7 @@ const RootRoute = () => {
         <Route path="/together/login" element={<Login />} />
         <Route path="/together/signin" element={<SignIn />} />
         <Route path="/together/searchParty" element={<SearchParty />} />
+        <Route path="/createParty" element={<CreateParty />} />
       </Routes>
     </BrowserRouter>
   );
