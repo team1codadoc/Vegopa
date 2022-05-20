@@ -5,11 +5,11 @@ import GameResult from "../pages/GameResult";
 import MbtiResultPage from "../pages/mbtiResultPage";
 import MbtiSelectPage from "../pages/mbtiSelectPage";
 import MbtiLoading from "../pages/mbtiResultPage/MbtiLoading";
-import Restaurant from "../pages/Restaurant";
+import Restaurant from "../pages/RestaurantPage";
 import MainChoice from "../pages/MainChoice";
-import MethodChoice from "../pages/method";
-import EatTogether from "../pages/together";
-import Main from "../pages/main";
+import MethodChoice from "../pages/MethodPage";
+import EatTogether from "../pages/TogetherPage";
+import Main from "../pages/MainPage";
 
 const RootRoute = () => {
   return (
