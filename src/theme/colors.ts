@@ -6,6 +6,7 @@ type Colors = {
   YELLOW_COLOR: string;
   GREY_COLOR: string;
   DARK_GRAY: string;
+  KaKao_Yellow: string;
 };
 
 const colors: Colors = {
@@ -16,6 +17,7 @@ const colors: Colors = {
   YELLOW_COLOR: "#e0a800",
   GREY_COLOR: "#B6AEAE",
   DARK_GRAY: "#C4C4C4",
+  KaKao_Yellow: "#f9e000",
 };
 
 export default colors;
