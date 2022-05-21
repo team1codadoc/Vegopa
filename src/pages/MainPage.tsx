@@ -67,7 +67,7 @@ const Main = () => {
         </RouletteLink>
       </Header>
       <MainWrapper>
-        <img src={Logo} alt="logo" />
+        <img src="/assets/vegopa.png" alt="logo" />
         <Link to="/mainChoice">
           <MenuRecommendBtn type="button">메뉴 추천받기</MenuRecommendBtn>
         </Link>

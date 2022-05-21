@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { FaAngleRight } from "react-icons/fa";
-import eating from "../img/charEating.png";
 
 const Wrapper = styled.div`
   height: 100%;
@@ -74,7 +73,7 @@ const MainChoice = () => {
             <Text>당신을 위해!</Text>
           </Link>
         </Button>
-        <Img src={eating} />
+        <Img src={"/assets/charEating.png"} />
         <Button>
           <Link to="/together">
             <Title>같이</Title>

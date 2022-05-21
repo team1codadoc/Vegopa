@@ -1,9 +1,12 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { ReactComponent as Icon } from "../../../icon/chevron-left.svg";
+import { ReactComponent as Icon } from "../../icon/chevron-left.svg";
+type props = {
+  title: string;
+};
 
-const Navbar = () => {
+const Navbar = ({ title }: props) => {
   const navigate = useNavigate();
   return (
     <NavbarWrapper>
@@ -11,7 +14,7 @@ const Navbar = () => {
         <Icon />
       </BackButton>
       <div>
-        <Title>음식 mbti</Title>
+        <Title>{title}</Title>
       </div>
     </NavbarWrapper>
   );

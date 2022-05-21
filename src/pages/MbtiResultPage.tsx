@@ -1,13 +1,13 @@
 import React, { useContext, useEffect } from "react";
 import styled from "styled-components";
-import { ReactComponent as Icon } from "../../icon/retry.svg";
+import { ReactComponent as Icon } from "../icon/retry.svg";
 import chainIcon from "/assets/chain_icon.png";
 import kakaoIcon from "/assets/kakao_icon.png";
 import facebookIcon from "/assets/facebook_icon.png";
 import twitterIcon from "/assets/twitter_icon.png";
-import { MbtiContext } from "../../store/MbtiContext";
+import { MbtiContext } from "../store/MbtiContext";
 import { useNavigate } from "react-router-dom";
-import { mbtiQuestion, mbtiQuestionType } from "../../Constant/constant";
+import { mbtiQuestion, mbtiQuestionType } from "../Constant/constant";
 
 export const MbtiResultPage = () => {
   const context = useContext(MbtiContext);

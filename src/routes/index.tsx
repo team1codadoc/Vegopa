@@ -1,10 +1,10 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import FoodSelectPage from "../pages/foodSelectPage";
+import FoodSelectPage from "../pages/FoodSelectPage";
 import GameResult from "../pages/GameResult";
-import MbtiResultPage from "../pages/mbtiResultPage";
-import MbtiSelectPage from "../pages/mbtiSelectPage";
-import MbtiLoading from "../pages/mbtiResultPage/MbtiLoading";
+import MbtiResultPage from "../pages/MbtiResultPage";
+import MbtiSelectPage from "../pages/MbtiSelectPage";
+import MbtiLoading from "../components/mbtiResultPage/MbtiLoading";
 import Restaurant from "../pages/RestaurantPage";
 import MainChoice from "../pages/MainChoice";
 import MethodChoice from "../pages/MethodPage";

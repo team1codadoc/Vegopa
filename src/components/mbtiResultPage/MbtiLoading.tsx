@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import Spinner from "../../components/Spinner";
+import Spinner from "../Spinner";
 import colors from "../../theme/colors";
 
 const MbtiLoading = () => {
