@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { ReactComponent as Icon } from "../../icon/chevron-left.svg";
+import { ReactComponent as Icon } from "../../asset/icon/chevron-left.svg";
 type props = {
   title: string;
 };

@@ -1,7 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import styled from "styled-components";
-import { ReactComponent as Icon } from "../icon/retry.svg";
-import chainIcon from "/assets/chain_icon.png";
+import { ReactComponent as Icon } from "../asset/icon/retry.svg";
 import kakaoIcon from "/assets/kakao_icon.png";
 import facebookIcon from "/assets/facebook_icon.png";
 import twitterIcon from "/assets/twitter_icon.png";
