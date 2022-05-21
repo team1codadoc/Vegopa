@@ -5,30 +5,29 @@ import { FaAngleRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const Wrapper = styled.div`
+  height: 100%;
   display: flex;
+  justify-content: space-between;
   flex-direction: column;
-  align-items: center;
-`;
-
-const LogoWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 100px 0 60px 0;
+  padding: 40px;
 `;
 
 const Header = styled.div`
-  align-self: end;
-  padding: 25px 10px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px;
   h2 {
     font-size: 1.75rem;
     font-weight: 500;
+    margin-bottom: 10px;
   }
 
   .roulette {
-    margin-top: 13px;
+    display: flex;
     font-size: 12px;
     font-weight: 400;
+    align-items: center;
   }
 `;
 
@@ -38,20 +37,7 @@ const MenuRecommendBtn = styled.button`
   border-radius: 20px;
   font-size: 1.2rem;
   background-color: ${({ theme }) => theme.colors.DARK_GRAY};
-`;
-
-const Bottom = styled.div`
-  position: fixed;
-  bottom: 15px;
-  left: 15px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-const MbTI = styled.button`
-  display: flex;
-  flex-direction: column;
+  margin-top: 80px;
 `;
 
 const StyledLink = styled(Link)`
@@ -61,11 +47,12 @@ const StyledLink = styled(Link)`
 
 const RouletteLink = styled(Link)`
   color: ${({ theme }) => theme.colors.BLACK_COLOR};
-  span {
-    font-size: 12px;
-    margin-top: 10px;
-    display: block;
-  }
+`;
+const MainWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const Main = () => {
@@ -74,24 +61,24 @@ const Main = () => {
       <Header>
         <RouletteLink to="/soloEat/result">
           <h2>귀찮아...</h2>
-          <span>룰렛으로 추천받기</span>
+          <span className="roulette">
+            룰렛으로 추천받기 <FaAngleRight size={16} fontWeight={400} />
+          </span>
         </RouletteLink>
       </Header>
-      <LogoWrapper>
+      <MainWrapper>
         <img src={Logo} alt="logo" />
-      </LogoWrapper>
-      <Link to="/mainChoice">
-        <MenuRecommendBtn type="button">메뉴 추천받기</MenuRecommendBtn>
-      </Link>
-      <Bottom>
-        <StyledLink to="/select/1">
-          <MbTI>
-            <p>밥먹기 전에 심심하면</p>
-            <p>음BTI 해볼래요?</p>
-          </MbTI>
-          <FaAngleRight size={23} />
-        </StyledLink>
-      </Bottom>
+        <Link to="/mainChoice">
+          <MenuRecommendBtn type="button">메뉴 추천받기</MenuRecommendBtn>
+        </Link>
+      </MainWrapper>
+      <StyledLink to="/select/1">
+        <div>
+          <p>밥먹기 전에 심심하면</p>
+          <p>음BTI 해볼래요?</p>
+        </div>
+        <FaAngleRight size={23} />
+      </StyledLink>
     </Wrapper>
   );
 };

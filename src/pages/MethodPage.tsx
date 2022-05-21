@@ -4,11 +4,12 @@ import { Link } from "react-router-dom";
 import { FaAngleRight } from "react-icons/fa";
 import heehee from "../img/charHeeHee.png";
 
-const Wrapper = styled.section`
+const Wrapper = styled.div`
   background: white;
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100%;
 `;
 
 const Container = styled.div`

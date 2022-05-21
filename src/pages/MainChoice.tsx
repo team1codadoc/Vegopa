@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 import { FaAngleRight } from "react-icons/fa";
 import eating from "../img/charEating.png";
 
-const Wrapper = styled.section`
+const Wrapper = styled.div`
+  height: 100%;
   background: white;
   display: flex;
   justify-content: center;

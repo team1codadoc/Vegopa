@@ -48,6 +48,7 @@ const QuestionText = styled.h1`
 
 const SelectPageWrapper = styled.div`
   padding: 0 12px;
+  height: 100%;
 `;
 
 const ProgressBar = styled.div`
