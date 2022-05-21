@@ -37,6 +37,7 @@ export default MbtiSelectPage;
 const SelectWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  background-color: #d3d3d3;
 `;
 
 const QuestionText = styled.h1`
