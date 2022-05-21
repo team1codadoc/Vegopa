@@ -6,6 +6,7 @@ import { RiSearchEyeLine } from "react-icons/ri";
 
 import { MapTogether } from "../../components/mapTogether";
 import { HeaderComponent } from "../../components/Header";
+import theme from "../../theme";
 
 const Wrapper = styled.section`
   background: white;
@@ -19,48 +20,44 @@ const Container = styled.div`
   height: 660px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   position: relative;
   overflow: hidden;
+  border: 1px solid black;
 `;
 
 const MapContainer = styled.div`
   width: inherit;
-  height: 80%;
+  height: 100%;
   position: absolute;
-  top: 170px;
+  top: 0;
+  z-index: 0;
 `;
 
 const NavBar = styled.div`
   width: inherit;
   height: 120px;
   position: absolute;
-  bottom: 0;
+  bottom: 35px;
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 100;
 `;
 
-const NavIconBox = styled.div`
-  width: 80px;
-  height: 70px;
-  border-radius: 15px;
-  margin-right: 10px;
-  background: black;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+const Button = styled.button`
+  width: 60%;
+  height: 40px;
+  border-radius: 10px;
+  background: ${({ theme }) => theme.colors.LIGHT_GREEN};
+  box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.5);
   color: white;
-  font-size: 35px;
+  font-size: 1.2em;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-`;
-
-const Title = styled.h1`
-  font-size: 58px;
-  padding-left: 25px;
-  text-decoration: underline;
 `;
 
 const SearchParty = () => {
@@ -68,21 +65,11 @@ const SearchParty = () => {
     <Wrapper>
       <Container>
         <HeaderComponent />
-        <Title> Vegopa </Title>
         <MapContainer>
           <MapTogether />
         </MapContainer>
         <NavBar>
-          <a href="/together/searchSuggested">
-            <NavIconBox>
-              <RiSearchEyeLine />
-            </NavIconBox>
-          </a>
-          <a href="/together/joinParty">
-            <NavIconBox>
-              <GiPartyPopper />
-            </NavIconBox>
-          </a>
+          <Button>내 파티 열기 </Button>
         </NavBar>
       </Container>
     </Wrapper>

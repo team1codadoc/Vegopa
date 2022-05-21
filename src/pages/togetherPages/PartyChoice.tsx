@@ -39,16 +39,10 @@ const Button = styled.div`
 `;
 
 const Title = styled.div`
-  font-size: 2.5em;
+  font-size: 1.5em;
   font-weight: bold;
   text-align: center;
   padding-bottom: 10px;
-`;
-
-const Text = styled.p`
-  font-size: 1em;
-  color: rgba(0, 0, 0, 0.3);
-  line-height: 23px;
 `;
 
 const Img = styled.img``;
@@ -81,7 +75,7 @@ function PartyChoice() {
             <Arrow>
               <FaAngleRight />
             </Arrow>
-            <Text>파티 찾기</Text>
+            <Title>파티 찾기</Title>
           </Button>
         </Link>
       </Container>

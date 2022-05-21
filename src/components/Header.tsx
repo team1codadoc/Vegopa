@@ -1,29 +1,38 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 import { FaAngleLeft, FaHome, FaBars } from "react-icons/fa";
 import { BiSearch } from "react-icons/bi";
 
 const Header = styled.div`
   width: inherit;
-  height: 100px;
-  position: absolute;
-  top: -10px;
+  height: 7%;
+  background-color: ${({ theme }) => theme.colors.WHITE_COLOR};
+  position: fixed;
+  top: 0;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  box-shadow: 5px 10px 30px 10px rgba(255,255,255,0.8);
+  z-index: 1;
 `;
 
 const HeaderColumn = styled.div`
-  width: 100%;
+  width: 33%;
+  z-index: 2;
+  font-size: 1.5em;
   display: flex;
+  justify-content: center;
   align-items: center;
-  &:last-child {
+  &:first-child {
     justify-content: flex-start;
+    padding-left: 20px;
+  }
+  &:last-child {
+    justify-content: flex-end;
+    padding-right: 20px;
+    position: relative;
   }
 `;
 
@@ -46,14 +55,13 @@ const IconBox = styled.div`
   }
 `;
 
-const MainContainer = styled(motion.div)`
-  background-color: ${({theme}) => theme.colors.LIGHT_GREY};
+const SideBarContainer = styled(motion.div)`
+  background-color: ${({ theme }) => theme.colors.WHITE_COLOR};
   color: ${({ theme }) => theme.colors.DARK_GRAY};
   width: 40vw;
-  height: 0;
   position: absolute;
   right: 0;
-  top: 90px;
+  top: 35px;
   z-index: 10;
 `;
 
@@ -65,8 +73,8 @@ const TopSection = styled.div`
 `;
 
 const UserName = styled.div`
-    font-size: 18px;
-    line-height: 0;
+  font-size: 18px;
+  line-height: 0;
 `;
 
 const Search = styled.div`
@@ -79,7 +87,7 @@ const Search = styled.div`
 
 const Section = styled.section`
   display: flex;
-  color: ${({theme})=> theme.colors.DARK_GRAY};
+  color: ${({ theme }) => theme.colors.DARK_GRAY};
   gap: 10px;
   padding: 5px;
   transition: 0.2s cubic-bezier(0.6, -0.28, 0.735, 0.045);
@@ -91,43 +99,46 @@ const Section = styled.section`
 
 const routes = [
   {
-    path:"/",
+    path: "/",
     name: "Home",
     icon: <FaHome />,
-  }
+  },
 ];
 
 export const HeaderComponent = () => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
+  const navigate = useNavigate();
   return (
     <Header>
       <HeaderColumn>
-        <a href="/"><IconBox><FaAngleLeft /></IconBox></a>
-        <IconBox><FaBars onClick={toggle} /></IconBox>
+        <FaAngleLeft onClick={() => navigate(-1)} />
       </HeaderColumn>
-      <MainContainer animate={{height: isOpen ? "80vh" : "0vh" }}>
-        { isOpen && (
-          <>
-            <TopSection>
-              <UserName>User Name </UserName>
-            </TopSection>
-            <Search>
-              <BiSearch />
-              <input type="text" placeholder="Search" style={{border:"none", width:"160px"}} />
-            </Search>
-            <Section>
-              {routes.map((route) => (
-                <NavLink to={route.path} key={route.name}>
-                  <div>{route.icon}</div>
-                  <div>{route.name}</div>
-                </NavLink>
-              ))}
-            </Section>
-          </>)
-        }
-
-      </MainContainer>
+      <HeaderColumn>파티 목록</HeaderColumn>
+      <HeaderColumn>
+        <FaBars onClick={toggle} />
+        <SideBarContainer animate={{ height: isOpen ? "100vh" : "0vh" }}>
+          {isOpen && (
+            <>
+              <TopSection>
+                <UserName>User Name </UserName>
+              </TopSection>
+              <Search>
+                <BiSearch />
+                <input type="text" placeholder="Search" style={{ border: "none", width: "160px" }} />
+              </Search>
+              <Section>
+                {routes.map((route) => (
+                  <NavLink to={route.path} key={route.name}>
+                    <div>{route.icon}</div>
+                    <div>{route.name}</div>
+                  </NavLink>
+                ))}
+              </Section>
+            </>
+          )}
+        </SideBarContainer>
+      </HeaderColumn>
     </Header>
   );
 };

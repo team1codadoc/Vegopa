@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { useQuery } from "react-query";
+import axios from "axios";
 
 declare global {
   interface Window {
@@ -23,12 +25,28 @@ type Place = {
   y: string;
 };
 
+type Party = {
+  title: string;
+  image: string;
+  creator: number;
+  total: number;
+  taste: [string];
+  participants: [string];
+  meetingDate: Date;
+  location: string;
+  coordinates: { lat: number; lng: number };
+};
+
 export const MapTogether = () => {
   const query = "치킨";
   const { kakao } = window;
   const mapRef = useRef<HTMLDivElement>(null);
   const [selectedPlace, setSelectedPlace] = useState<Place>();
   const navigate = useNavigate();
+  const partyPic = useQuery("", async () => {
+    const { data } = await axios.get("/api/party");
+    return data;
+  });
   const getLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -41,7 +59,7 @@ export const MapTogether = () => {
 
           const map = new kakao.maps.Map(container, options);
           const places = new kakao.maps.services.Places(map);
-          const icon = new kakao.maps.MarkerImage("https://ifh.cc/g/aDMhy0.png", new kakao.maps.Size(64, 68), {
+          const markerImg = new kakao.maps.MarkerImage({ partyPic }, new kakao.maps.Size(64, 68), {
             shape: "poly",
             coords: "16,0,20,2,24,6,26,10,26,16,23,22,17,25,14,35,13,35,9,25,6,24,2,20,0,16,0,10,2,6,6,2,10,0",
           });
@@ -63,7 +81,7 @@ export const MapTogether = () => {
             const marker = new kakao.maps.Marker({
               map: map,
               position: new kakao.maps.LatLng(place.y, place.x),
-              image: icon,
+              image: markerImg,
             });
             marker.setMap(map);
             kakao.maps.event.addListener(marker, "click", function () {
@@ -88,8 +106,8 @@ export const MapTogether = () => {
 
   // 지도 사이즈 관련 스타일
   const mapStyle = {
-    width: "390px",
-    height: "360px",
+    width: "inherit",
+    height: "inherit",
   };
 
   return (
