@@ -1,8 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-
-import { GiPartyPopper } from "react-icons/gi";
-import { RiSearchEyeLine } from "react-icons/ri";
+import { Link } from "react-router-dom";
 
 import { MapTogether } from "../../components/mapTogether";
 import { HeaderComponent } from "../../components/Header";
@@ -51,7 +49,7 @@ const Button = styled.button`
   height: 40px;
   border-radius: 10px;
   background: ${({ theme }) => theme.colors.LIGHT_GREEN};
-  box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.5);
+  box-shadow: 2px 3px 2px rgba(0, 0, 0, 0.5);
   color: white;
   font-size: 1.2em;
   display: flex;
@@ -69,7 +67,9 @@ const SearchParty = () => {
           <MapTogether />
         </MapContainer>
         <NavBar>
-          <Button>내 파티 열기 </Button>
+          <Button>
+            <Link to="/together/joinParty">내 파티 열기</Link>{" "}
+          </Button>
         </NavBar>
       </Container>
     </Wrapper>

@@ -7,8 +7,8 @@ import { FaAngleLeft, FaHome, FaBars } from "react-icons/fa";
 import { BiSearch } from "react-icons/bi";
 
 const Header = styled.div`
-  width: inherit;
-  height: 7%;
+  width: 100%;
+  height: 45px;
   background-color: ${({ theme }) => theme.colors.WHITE_COLOR};
   position: fixed;
   top: 0;
@@ -36,23 +36,8 @@ const HeaderColumn = styled.div`
   }
 `;
 
-const IconBox = styled.div`
-  position: absolute;
-  top: 15px;
-  width: 45px;
-  height: 45px;
-  border-radius: 15px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 25px;
-  cursor: pointer;
-  &:first-child {
-    left: 15px;
-  }
-  &:last-child {
-    right: 15px;
-  }
+const Title = styled.div`
+  font-weight: bold;
 `;
 
 const SideBarContainer = styled(motion.div)`
@@ -114,7 +99,9 @@ export const HeaderComponent = () => {
       <HeaderColumn>
         <FaAngleLeft onClick={() => navigate(-1)} />
       </HeaderColumn>
-      <HeaderColumn>파티 목록</HeaderColumn>
+      <HeaderColumn>
+        <Title>{location.pathname.split("/")[2] ? location.pathname.split("/")[2] : "Title"}</Title>
+      </HeaderColumn>
       <HeaderColumn>
         <FaBars onClick={toggle} />
         <SideBarContainer animate={{ height: isOpen ? "100vh" : "0vh" }}>
