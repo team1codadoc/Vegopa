@@ -14,6 +14,7 @@ import SignIn from "../pages/signin";
 import Main from "../pages/MainPage";
 import SearchParty from "../pages/SearchParty";
 import CreateParty from "../pages/CreateParty";
+import PartyDetailPage from "../pages/PartyDetailPage";
 
 const RootRoute = () => {
   return (
@@ -40,6 +41,7 @@ const RootRoute = () => {
         <Route path="/together/signin" element={<SignIn />} />
         <Route path="/together/searchParty" element={<SearchParty />} />
         <Route path="/together/createParty" element={<CreateParty />} />
+        <Route path="/party/:id" element={<PartyDetailPage />} />
       </Routes>
     </BrowserRouter>
   );
