@@ -9,6 +9,8 @@ type Colors = {
   KaKao_Yellow: string;
   LIGHT_GREEN: string;
   PINK: string;
+  DARK_RED: string;
+  KAKAO_YELLOW: string;
 };
 
 const colors: Colors = {
@@ -22,6 +24,8 @@ const colors: Colors = {
   KaKao_Yellow: "#f9e000",
   LIGHT_GREEN: "#C9E164",
   PINK: "#FD79A8",
+  DARK_RED: "#8B0000",
+  KAKAO_YELLOW: "#f9e000",
 };
 
 export default colors;
