@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { PartyLocationMap } from "../components/partyLocationMap";
+import { PartyLocationMap } from "../../components/partyLocationMap";
+import PropTypes from "prop-types";
 
 type partyInform = {
   title: string;
@@ -11,9 +12,10 @@ type partyInform = {
   location: string;
   coordinates: { lat: number; lng: number };
 };
-type ImageUploader = {
-  upload: any;
-};
+interface Box {
+  url: string;
+}
+
 const Restaurant = () => {
   const [title, setTitle] = useState("");
   const [image, setImage] = useState("");
@@ -59,13 +61,29 @@ const Restaurant = () => {
   const closeMap = (boolean: boolean) => {
     setOpenMap(boolean);
   };
-  const inputRef = useRef<HTMLInputElement>(null);
 
+  const imageUploader = async (file) => {
+    const data = new FormData();
+    data.append("file", file);
+    data.append("upload_preset", "dtsaonv8");
+    console.log(data);
+    const cloudName = "deiyompy0";
+    const res = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/upload`, {
+      method: "POST",
+      body: data,
+    });
+
+    return await res.json();
+  };
+
+  const inputRef = useRef<HTMLInputElement>(null);
   const imageUploadBtn = () => {
     inputRef.current.click();
   };
-  const fileChange = (e) => {
+  const fileChange = async (e) => {
     console.log(e.target.files[0]);
+    const uploaded = await imageUploader(e.target.files[0]);
+    setImage(uploaded.url);
   };
 
   return (
@@ -78,9 +96,8 @@ const Restaurant = () => {
 
         <Body>
           <PhotoUpload>
-            <Box>
-              <p>대표 사진을 업로드 해주세요</p>
-            </Box>
+            {image ? <Box url={image}></Box> : <p>대표 사진을 업로드 해주세요</p>}
+
             <input ref={inputRef} type="file" accept="image/*" onChange={fileChange} />
             <button onClick={imageUploadBtn}>이미지 업로드</button>
           </PhotoUpload>
@@ -241,12 +258,14 @@ const PhotoUpload = styled.div`
     background-color: ${({ theme }) => theme.colors.LIGHT_GREY};
   }
 `;
-const Box = styled.div`
-  background-color: ${({ theme }) => theme.colors.GREY_COLOR};
+const Box = styled.div<Box>`
+  background: center url(${(props) => props.url});
+  background-size: contain;
   width: 100px;
   height: 120px;
   padding: 10px;
 `;
+
 const PartyTitle = styled.div`
   padding: 0 0 30px 0;
   display: flex;
