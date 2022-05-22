@@ -1,8 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import Spinner from "./Spinner";
-import home_icon from "/assets/home_icon.png";
+import PropTypes from "prop-types";
 
 declare global {
   interface Window {
@@ -25,34 +24,33 @@ type Place = {
   y: string;
 };
 
-export const Map = () => {
-  const query = "치킨";
+export const PartyLocationMap = (props) => {
+  const { query } = props;
   const { kakao } = window;
   const mapRef = useRef<HTMLDivElement>(null);
+  const searchRef = useRef<HTMLDivElement>(null);
+  const infowindow = useRef<HTMLDivElement>(null);
   const [selectedPlace, setSelectedPlace] = useState<Place>();
-  const [isLoading, setIsLoading] = useState(false);
 
   const getLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
+          // 맵 생성
           const container = mapRef.current;
           const options = {
             center: new kakao.maps.LatLng(position.coords.latitude, position.coords.longitude),
-            level: 5,
+            level: 4,
           };
-          if (container !== null) {
-            setIsLoading(true);
-          }
           const map = new kakao.maps.Map(container, options);
+
           const places = new kakao.maps.services.Places(map);
-          kakao.maps.event.addListener(map, "click", function () {
-            setSelectedPlace(null);
-          });
+
           places.keywordSearch(query, placesSearchCB, {
             useMapBounds: true,
           });
 
+          const infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
           function placesSearchCB(data, status, pagination) {
             if (status === kakao.maps.services.Status.OK) {
               for (let i = 0; i < data.length; i++) {
@@ -66,7 +64,6 @@ export const Map = () => {
               map: map,
               position: new kakao.maps.LatLng(place.y, place.x),
             });
-
             kakao.maps.event.addListener(marker, "click", function () {
               setSelectedPlace(place);
             });
@@ -85,49 +82,48 @@ export const Map = () => {
 
   useEffect(() => {
     getLocation();
-  }, [mapRef]);
+  }, []);
 
   // 지도 사이즈 관련 스타일
   const mapStyle = {
     width: "100%",
-    height: "100vh",
+    height: "100%",
+  };
+
+  const submitText = () => {
+    props.propFunc(selectedPlace);
+    props.closeMap(false);
   };
 
   return (
-    <>
-      <HomeBtn>
-        <Link to="/">
-          <img src={home_icon} />
-        </Link>
-      </HomeBtn>
+    <Container>
+      <div ref={mapRef} style={mapStyle}></div>
+      {selectedPlace && (
+        <PlaceInfo>
+          <PlaceName>{selectedPlace.place_name}</PlaceName>
+          <hr></hr>
+          <PlaceDetail>{selectedPlace.road_address_name}</PlaceDetail>
+          <PlaceDetail>{selectedPlace.phone}</PlaceDetail>
 
-      {!isLoading ? (
-        <Loading>
-          <Spinner />
-          <p>지도 불러오는 중...</p>
-        </Loading>
-      ) : (
-        ""
+          <a href={selectedPlace.place_url}></a>
+          <Footer>
+            <StyleBtn onClick={submitText}>선택</StyleBtn>
+          </Footer>
+        </PlaceInfo>
       )}
-
-      <div ref={mapRef} style={mapStyle}>
-        {selectedPlace && (
-          <PlaceInfo>
-            <PlaceName>{selectedPlace.place_name}</PlaceName>
-            <hr></hr>
-            <PlaceDetail>{selectedPlace.road_address_name}</PlaceDetail>
-            <PlaceDetail>{selectedPlace.phone}</PlaceDetail>
-
-            <a href={selectedPlace.place_url}>
-              <StyleBtn>카카오 지도로 보기</StyleBtn>
-            </a>
-          </PlaceInfo>
-        )}
-      </div>
-    </>
+    </Container>
   );
 };
-
+PartyLocationMap.propTypes = {
+  query: PropTypes.string,
+  propFunc: PropTypes.func,
+  closeMap: PropTypes.func,
+};
+const Container = styled.div`
+  position: relative;
+  width: 100%;
+  height: 100%;
+`;
 const PlaceInfo = styled.div`
   background-color: ${({ theme }) => theme.colors.WHITE_COLOR};
   position: absolute;
@@ -137,30 +133,6 @@ const PlaceInfo = styled.div`
   padding: 24px;
   border-radius: 16px;
 `;
-const HomeBtn = styled.div`
-  z-index: 10;
-  position: fixed;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  top: 3%;
-  left: 50%;
-  transform: translate(-50%);
-  background-color: ${({ theme }) => theme.colors.WHITE_COLOR};
-  width: 36px;
-  height: 36px;
-  border-radius: 50%; ;
-`;
-const Loading = styled.div`
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  p {
-    margin-top: 3%;
-  }
-`;
 const PlaceName = styled.div`
   font-size: 1.3rem;
 `;
@@ -168,13 +140,17 @@ const PlaceDetail = styled.div`
   font-size: 1.1rem;
   margin-bottom: 1vh;
 `;
-const StyleBtn = styled.button`
+const Footer = styled.div`
   width: 100%;
-  padding: 16px 0;
-  border: 3px solid ${({ theme }) => theme.colors.GREY_COLOR};
-  background-color: ${({ theme }) => theme.colors.KAKAO_YELLOW};
-  border-radius: 10px;
-  font-size: 20px;
-  margin-bottom: 10px;
-  transition: all 300ms ease-in-out;
+  display: flex;
+  justify-content: center;
+`;
+const StyleBtn = styled.button`
+  border: 1px solid ${({ theme }) => theme.colors.BLACK_COLOR};
+  background-color: ${({ theme }) => theme.colors.DARK_RED};
+  color: ${({ theme }) => theme.colors.WHITE_COLOR};
+  border-radius: 5px;
+  width: 50px;
+  height: 30px;
+  font-size: 1.1rem;
 `;
