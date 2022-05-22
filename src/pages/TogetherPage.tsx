@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { FaAngleRight } from "react-icons/fa";
-import heehee from "../../img/charHeeHee.png";
+import heehee from "../img/charHeeHee.png";
 
 const Wrapper = styled.section`
   background: white;

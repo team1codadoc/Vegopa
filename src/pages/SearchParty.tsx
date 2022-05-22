@@ -5,6 +5,22 @@ import { Link } from "react-router-dom";
 import { MapTogether } from "../components/mapTogether";
 import { HeaderComponent } from "../components/Header";
 
+const Wrapper = styled.section`
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Container = styled.div`
+  width: 394px;
+  height: 670px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+`;
+
 const MapContainer = styled.div`
   width: inherit;
   height: 100%;
@@ -42,18 +58,20 @@ const SearchNearBy = styled.form``;
 
 const SearchParty = () => {
   return (
-    <>
-      <HeaderComponent />
-      <SearchNearBy></SearchNearBy>
-      <MapContainer>
-        <MapTogether />
-      </MapContainer>
-      <NavBar>
-        <Button>
-          <Link to="/together/joinParty">내 파티 열기</Link>{" "}
-        </Button>
-      </NavBar>
-    </>
+    <Wrapper>
+      <Container>
+        <HeaderComponent />
+        <SearchNearBy></SearchNearBy>
+        <MapContainer>
+          <MapTogether />
+        </MapContainer>
+        <NavBar>
+          <Button>
+            <Link to="/together/joinParty">내 파티 열기</Link>{" "}
+          </Button>
+        </NavBar>
+      </Container>
+    </Wrapper>
   );
 };
 

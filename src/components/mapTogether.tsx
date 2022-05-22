@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { useQuery } from "react-query";
+import axios from "axios";
 
 declare global {
   interface Window {
@@ -29,6 +31,8 @@ export const MapTogether = () => {
   const mapRef = useRef<HTMLDivElement>(null);
   const [selectedPlace, setSelectedPlace] = useState<Place>();
   const navigate = useNavigate();
+  const { data, isLoading } = useQuery("", async () => axios.get("http://localhost:8080/api/food"));
+  const img = data?.data.foods[3].image;
   const getLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -41,6 +45,15 @@ export const MapTogether = () => {
 
           const map = new kakao.maps.Map(container, options);
           const places = new kakao.maps.services.Places(map);
+          const markerImg = new kakao.maps.MarkerImage(
+            "https://i.pinimg.com/564x/82/ba/16/82ba16b3093cf8e9a127a1a77763b721.jpg",
+            // img,
+            new kakao.maps.Size(64, 68),
+            {
+              shape: "poly",
+              coords: "16,0,20,2,24,6,26,10,26,16,23,22,17,25,14,35,13,35,9,25,6,24,2,20,0,16,0,10,2,6,6,2,10,0",
+            }
+          );
 
           places.keywordSearch(query, placesSearchCB, {
             useMapBounds: true,
@@ -82,8 +95,8 @@ export const MapTogether = () => {
 
   // 지도 사이즈 관련 스타일
   const mapStyle = {
-    width: "390px",
-    height: "360px",
+    width: "100%",
+    height: "100%",
   };
 
   return (

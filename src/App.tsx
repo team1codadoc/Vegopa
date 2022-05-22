@@ -4,17 +4,23 @@ import GlobalStyles from "./styles/GlobalStyle";
 import styled, { ThemeProvider } from "styled-components";
 import theme from "./theme";
 import { MbtiProvider } from "./store/MbtiContext";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 function App() {
+  const queryClient = new QueryClient({
+    defaultOptions: { queries: { refetchOnWindowFocus: false, refetchOnMount: false } },
+  });
   return (
-    <ThemeProvider theme={theme}>
-      <MbtiProvider>
-        <AppWrapper>
-          <GlobalStyles />
-          <RootRoute />
-        </AppWrapper>
-      </MbtiProvider>
-    </ThemeProvider>
+    <AppWrapper>
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider theme={theme}>
+          <MbtiProvider>
+            <GlobalStyles />
+            <RootRoute />
+          </MbtiProvider>
+        </ThemeProvider>
+      </QueryClientProvider>
+    </AppWrapper>
   );
 }
 
