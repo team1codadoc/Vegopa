@@ -80,7 +80,14 @@ const Button = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: all 300ms ease-in-out;
   cursor: pointer;
+  &:hover {
+    border: 2px solid ${({ theme }) => theme.colors.LIGHT_GREEN};
+    background-color: ${({ theme }) => theme.colors.WHITE_COLOR};
+    color: ${({ theme }) => theme.colors.LIGHT_GREEN};
+    box-shadow: none;
+  }
 `;
 
 const SearchNearBy = styled.form`

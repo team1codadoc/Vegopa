@@ -107,8 +107,12 @@ export const MapTogether = () => {
           <PlaceImg>파티 대표 이미지</PlaceImg>
           <PlaceName>국밥 같이 먹으러 갈 사람~</PlaceName>
           <hr></hr>
-          <PlaceDetail>국밥, 한식, 국물</PlaceDetail>
-          <PlaceDetail>모임 장소: </PlaceDetail>
+          <PlaceDetail>국밥, 한식, 국물, {selectedPlace.category_group_name}</PlaceDetail>
+          <hr></hr>
+          <PlaceDetail>
+            모임 장소: {selectedPlace.place_name} <br /> {selectedPlace.address_name}
+          </PlaceDetail>
+          <hr></hr>
           <PlaceDetail>모임 시간: </PlaceDetail>
 
           <a href={selectedPlace.place_url}>
@@ -163,4 +167,9 @@ const StyleBtn = styled.button`
   margin-bottom: 10px;
   transition: all 300ms ease-in-out;
   cursor: pointer;
+  &:hover {
+    color: ${({ theme }) => theme.colors.WHITE_COLOR};
+    background: ${({ theme }) => theme.colors.LIGHT_GREEN};
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+  }
 `;
