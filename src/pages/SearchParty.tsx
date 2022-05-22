@@ -1,16 +1,21 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { MapTogether } from "../components/mapTogether";
-import { HeaderComponent } from "../components/Header";
-import { FaSearch } from "react-icons/fa";
+import { FaSearch, FaAngleLeft } from "react-icons/fa";
 
 const SearchParty = () => {
+  const navigate = useNavigate();
   return (
     <Wrapper>
       <Container>
-        <HeaderComponent />
+        <GoBack>
+          <FaAngleLeft onClick={() => navigate(-1)} />
+        </GoBack>
+        <Home>
+          <Img src={"/assets/home_icon.png"} />
+        </Home>
         <SearchNearBy>
           <Icon>
             <FaSearch />
@@ -119,4 +124,19 @@ const Icon = styled.div`
   z-index: 101;
   position: absolute;
   left: 15px;
+`;
+const Home = styled.div`
+  position: absolute;
+  right: 20px;
+  top: 10px;
+`;
+const Img = styled.img`
+  width: 35px;
+  height: 35px;
+`;
+const GoBack = styled.div`
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  font-size: 1.8em;
 `;

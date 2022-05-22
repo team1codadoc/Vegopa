@@ -32,7 +32,7 @@ export const MapTogether = () => {
   const [selectedPlace, setSelectedPlace] = useState<Place>();
   const navigate = useNavigate();
   const { data, isLoading } = useQuery("", async () => axios.get("http://localhost:8080/api/food"));
-  const img = data?.data.foods[3].image;
+  console.log(data);
   const getLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -72,6 +72,7 @@ export const MapTogether = () => {
             const marker = new kakao.maps.Marker({
               map: map,
               position: new kakao.maps.LatLng(place.y, place.x),
+              image: markerImg,
             });
             kakao.maps.event.addListener(marker, "click", function () {
               setSelectedPlace(place);

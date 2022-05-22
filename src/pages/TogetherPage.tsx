@@ -88,5 +88,5 @@ const GoBack = styled.div`
   position: fixed;
   top: 15px;
   left: 15px;
-  font-size: 1.8em;
+  font-size: 1.6em;
 `;
