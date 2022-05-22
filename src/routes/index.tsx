@@ -13,6 +13,7 @@ import Login from "../pages/login";
 import SignIn from "../pages/signin";
 import Main from "../pages/MainPage";
 import SearchParty from "../pages/SearchParty";
+import CreateParty from "../pages/CreateParty";
 
 const RootRoute = () => {
   return (
