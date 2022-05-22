@@ -4,7 +4,7 @@ import FoodSelectPage from "../pages/FoodSelectPage";
 import GameResult from "../pages/GameResult";
 import MbtiResultPage from "../pages/MbtiResultPage";
 import MbtiSelectPage from "../pages/MbtiSelectPage";
-import MbtiLoading from "../components/mbtiResultPage/MbtiLoading";
+import MbtiLoading from "../components/MbtiLoading";
 import Restaurant from "../pages/RestaurantPage";
 import MainChoice from "../pages/MainChoice";
 import MethodChoice from "../pages/MethodPage";
@@ -22,7 +22,14 @@ const RootRoute = () => {
         <Route path="/mainChoice" element={<MainChoice />} />
         <Route path="/restaurant" element={<Restaurant />} />
         <Route path="/select/result" element={<MbtiResultPage />} />
-        <Route path="/select/loading" element={<MbtiLoading />} />
+        <Route
+          path="/select/loading"
+          element={<MbtiLoading title="결과 분석 페이지" subtitle="결과를 분석 중 입니다." path="/select/result" />}
+        />
+        <Route
+          path="/soloEat/loading"
+          element={<MbtiLoading title="메뉴 선택 페이지" subtitle="메뉴를 선택 중 입니다." path="/soloEat/result" />}
+        />
         <Route path="/soloEat/result" element={<GameResult />} />
         <Route path="/select/:problem" element={<MbtiSelectPage />} />
         <Route path="/soloEat/:problem" element={<FoodSelectPage />} />

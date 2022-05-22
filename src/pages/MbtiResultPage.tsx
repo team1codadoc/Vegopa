@@ -1,12 +1,13 @@
 import React, { useContext, useEffect } from "react";
 import styled from "styled-components";
-import { ReactComponent as Icon } from "../asset/icon/retry.svg";
+
 import kakaoIcon from "/assets/kakao_icon.png";
 import facebookIcon from "/assets/facebook_icon.png";
 import twitterIcon from "/assets/twitter_icon.png";
 import { MbtiContext } from "../store/MbtiContext";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { mbtiQuestion, mbtiQuestionType } from "../Constant/constant";
+import RetryButton from "../components/RetryButton";
 
 export const MbtiResultPage = () => {
   const context = useContext(MbtiContext);
@@ -44,20 +45,16 @@ export const MbtiResultPage = () => {
         </MbtiResultText>
       </ResultPage>
       <div>
-        <AgainWrapper>
-          <AgainButton>
-            <Icon></Icon>
-          </AgainButton>
-          <AgainText>다시하기</AgainText>
-        </AgainWrapper>
+        <RetryButton />
         <ShareContainer>
           <img src="/assets/chain_icon.png" alt="share link" />
           <img className="share-kakao" src={kakaoIcon} alt="kakao-share" />
           <img className="share-facebook" src={facebookIcon} alt="facebook-share" />
           <img className="share-twitter" src={twitterIcon} alt="twitter-share" />
         </ShareContainer>
-
-        <RecommendButton>메뉴 추천받기</RecommendButton>
+        <Link to="/soloEat/loading">
+          <RecommendButton>메뉴 추천받기</RecommendButton>
+        </Link>
       </div>
     </ResultPageWrapper>
   );

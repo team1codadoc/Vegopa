@@ -9,6 +9,7 @@ const MbtiSelectPage = () => {
   const location = useLocation();
   const question = +location.pathname.split("/")[2] - 1;
   const [presentQuestion, setQuestion] = useState(question);
+
   useEffect(() => {
     setQuestion(question + 1);
   }, [location]);

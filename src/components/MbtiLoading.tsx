@@ -1,13 +1,19 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import Spinner from "../Spinner";
-import colors from "../../theme/colors";
+import Spinner from "./Spinner";
+import colors from "../theme/colors";
 
-const MbtiLoading = () => {
+type props = {
+  title: string;
+  path: string;
+  subtitle: string;
+};
+
+const MbtiLoading = ({ title, path, subtitle }: props) => {
   const navigate = useNavigate();
   useEffect(() => {
-    setTimeout(() => navigate("/select/result"), 2000);
+    setTimeout(() => navigate(path), 2000);
   }, []);
 
   const spinnerColor = colors.BLACK_COLOR;
@@ -15,8 +21,8 @@ const MbtiLoading = () => {
   return (
     <MbtiLoadingWrapper>
       <Container>
-        <h1 className="ir">결과 분석 페이지</h1>
-        <LoadingTitle>결과 분석 중입니다.</LoadingTitle>
+        <h1 className="ir">{title}</h1>
+        <LoadingTitle>{subtitle}</LoadingTitle>
         <Spinner color={spinnerColor} innerColor={spinnerInnerColor} />
       </Container>
     </MbtiLoadingWrapper>

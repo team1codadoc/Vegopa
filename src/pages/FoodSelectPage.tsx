@@ -59,7 +59,7 @@ const FoodSelectPage = () => {
   };
   const NextButtonHandler = () => {
     if (questionNum + 1 === foodQuestion.length) {
-      navigator("/soloEat/result");
+      navigator("/soloEat/loading");
     } else {
       navigator(`/soloEat/${questionNum + 2}`);
     }

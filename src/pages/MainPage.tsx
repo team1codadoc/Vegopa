@@ -59,7 +59,7 @@ const Main = () => {
   return (
     <Wrapper>
       <Header>
-        <RouletteLink to="/soloEat/result">
+        <RouletteLink to="/soloEat/loading">
           <h2>귀찮아...</h2>
           <span className="roulette">
             룰렛으로 추천받기 <FaAngleRight size={16} fontWeight={400} />
