@@ -1,13 +1,11 @@
 import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { ReactComponent as IconId } from "../../icon/id.svg";
-import { ReactComponent as IconPassword } from "../../icon/password.svg";
 
 const Login = () => {
   const navigator = useNavigate();
   const SignInButtonHandler = () => {
-    navigator("/withEat/signin");
+    navigator("/together/signin");
   };
   return (
     <LoginWrapper>
@@ -16,11 +14,9 @@ const Login = () => {
         <LoginMain>
           <form>
             <div className="wrapper">
-              <IconId></IconId>
               <input placeholder="아이디" type="text" name="userName" />
             </div>
             <div className="wrapper">
-              <IconPassword></IconPassword>
               <input placeholder="비밀번호" type="password" name="password" />
             </div>
             <button className="login-button">로그인</button>
@@ -84,7 +80,7 @@ const SignInState = styled.div`
 
 const SignInText = styled.div`
   color: #b1b1b1;
-  text-align: center;;
+  text-align: center;
   margin-bottom: 30px;
   font-size: 14px;
 `;
@@ -124,7 +120,6 @@ const LoginMain = styled.div`
       cursor: pointer;
       font-size: 20px;
       border-radius: 10px;
-
     }
   }
 `;
