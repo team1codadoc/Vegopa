@@ -1,68 +1,16 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
-import { FaAngleRight } from "react-icons/fa";
-
-const Wrapper = styled.div`
-  height: 100%;
-  background: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const Container = styled.div`
-  width: 394px;
-  height: 670px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-const Button = styled.div`
-  width: 230px;
-  height: 140px;
-  border-radius: 10px;
-  background: #f1f1f1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  &:first-child {
-    margin-top: 40px;
-  }
-  &:last-child {
-    margin-bottom: 40px;
-  }
-`;
-
-const Title = styled.div`
-  font-size: 2.5em;
-  font-weight: bold;
-  text-align: center;
-`;
-
-const Text = styled.p`
-  font-size: 1em;
-  color: rgba(0, 0, 0, 0.3);
-  line-height: 23px;
-`;
-
-const Img = styled.img``;
-
-const Arrow = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: flex-end;
-  margin-right: 40px;
-  font-size: x-large;
-`;
+import { Link, useNavigate } from "react-router-dom";
+import { FaAngleRight, FaAngleLeft } from "react-icons/fa";
 
 const MainChoice = () => {
+  const navigate = useNavigate();
   return (
     <Wrapper>
       <Container>
+        <GoBack>
+          <FaAngleLeft onClick={() => navigate(-1)} />
+        </GoBack>
         <Button>
           <Link to="/method">
             <Title>혼밥</Title>
@@ -90,3 +38,59 @@ const MainChoice = () => {
 };
 
 export default MainChoice;
+
+const Wrapper = styled.div`
+  height: 100%;
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+const Container = styled.div`
+  width: 394px;
+  height: 670px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+`;
+const Button = styled.div`
+  width: 230px;
+  height: 140px;
+  border-radius: 10px;
+  background: #f1f1f1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  &:first-child {
+    margin-top: 40px;
+  }
+  &:last-child {
+    margin-bottom: 40px;
+  }
+`;
+const Title = styled.div`
+  font-size: 2.5em;
+  font-weight: bold;
+  text-align: center;
+`;
+const Text = styled.p`
+  font-size: 1em;
+  color: rgba(0, 0, 0, 0.3);
+  line-height: 23px;
+`;
+const Img = styled.img``;
+const Arrow = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 40px;
+  font-size: x-large;
+`;
+const GoBack = styled.div`
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  font-size: 1.8em;
+`;

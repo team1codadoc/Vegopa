@@ -32,21 +32,22 @@ const SearchParty = () => {
 
 export default SearchParty;
 
-const Wrapper = styled.section`
+const Wrapper = styled.div`
   background: white;
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100%;
 `;
 
 const Container = styled.div`
-  width: 394px;
-  height: 670px;
+  max-width: 621px;
+  margin: auto;
+  background-color: #fff;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  position: relative;
 `;
 
 const MapContainer = styled.div`

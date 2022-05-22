@@ -1,7 +1,41 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
-import { FaAngleRight } from "react-icons/fa";
+import { Link, useNavigate } from "react-router-dom";
+import { FaAngleRight, FaAngleLeft } from "react-icons/fa";
+
+const MethodChoice = () => {
+  const navigate = useNavigate();
+  return (
+    <Wrapper>
+      <Container>
+        <GoBack>
+          <FaAngleLeft onClick={() => navigate(-1)} />
+        </GoBack>
+        <Link to="/soloEat/result">
+          <Button>
+            <Title>골라줘!</Title>
+            <Arrow>
+              <FaAngleRight />
+            </Arrow>
+            <Text>그냥 랜덤으로 추천해줘 </Text>
+          </Button>
+        </Link>
+        <Img src={"/assets/charHeeHee.png"} />
+        <Link to="/soloEat/1">
+          <Button>
+            <Title>고를래~</Title>
+            <Arrow>
+              <FaAngleRight />
+            </Arrow>
+            <Text>내 취향대로 추천 받을래</Text>
+          </Button>
+        </Link>
+      </Container>
+    </Wrapper>
+  );
+};
+
+export default MethodChoice;
 
 const Wrapper = styled.div`
   background: white;
@@ -12,8 +46,9 @@ const Wrapper = styled.div`
 `;
 
 const Container = styled.div`
-  width: 394px;
-  height: 670px;
+  max-width: 621px;
+  margin: auto;
+  background-color: #fff;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -61,33 +96,9 @@ const Arrow = styled.div`
   font-size: x-large;
   position: absolute;
 `;
-
-const MethodChoice = () => {
-  return (
-    <Wrapper>
-      <Container>
-        <Link to="/soloEat/result">
-          <Button>
-            <Title>골라줘!</Title>
-            <Arrow>
-              <FaAngleRight />
-            </Arrow>
-            <Text>그냥 랜덤으로 추천해줘 </Text>
-          </Button>
-        </Link>
-        <Img src={"/assets/charHeeHee.png"} />
-        <Link to="/soloEat/1">
-          <Button>
-            <Title>고를래~</Title>
-            <Arrow>
-              <FaAngleRight />
-            </Arrow>
-            <Text>내 취향대로 추천 받을래</Text>
-          </Button>
-        </Link>
-      </Container>
-    </Wrapper>
-  );
-};
-
-export default MethodChoice;
+const GoBack = styled.div`
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  font-size: 1.8em;
+`;

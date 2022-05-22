@@ -104,18 +104,13 @@ export const MapTogether = () => {
       <div ref={mapRef} style={mapStyle}></div>
       {selectedPlace && (
         <PlaceInfo>
+          <ExitBtn onClick={() => setSelectedPlace(null)}>X</ExitBtn>
           <PlaceImg>파티 대표 이미지</PlaceImg>
           <PlaceName>국밥 같이 먹으러 갈 사람~</PlaceName>
           <hr></hr>
           <PlaceDetail>국밥, 한식, 국물, {selectedPlace.category_group_name}</PlaceDetail>
-          <hr></hr>
-          <PlaceDetail>
-            모임 장소: {selectedPlace.place_name} <br /> {selectedPlace.address_name}
-          </PlaceDetail>
-          <hr></hr>
-          <PlaceDetail>모임 시간: </PlaceDetail>
 
-          <a href={selectedPlace.place_url}>
+          <a href={"#"}>
             <StyleBtn>파티 참가하기</StyleBtn>
           </a>
         </PlaceInfo>
@@ -136,12 +131,13 @@ const PlaceInfo = styled.div`
   padding: 24px;
   border-radius: 16px;
   box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
 `;
 const PlaceName = styled.div`
   font-size: 1.3rem;
 `;
 const PlaceDetail = styled.div`
-  font-size: 1.1rem;
+  font-size: 0.8rem;
   margin-bottom: 1vh;
 `;
 const PlaceImg = styled.div`
@@ -164,7 +160,6 @@ const StyleBtn = styled.button`
   text-shadow: 0.5px 0.5px 0.5px rgba(0, 0, 0, 0.8);
   border-radius: 10px;
   font-size: 18px;
-  margin-bottom: 10px;
   transition: all 300ms ease-in-out;
   cursor: pointer;
   &:hover {
@@ -172,4 +167,12 @@ const StyleBtn = styled.button`
     background: ${({ theme }) => theme.colors.LIGHT_GREEN};
     box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
   }
+`;
+const ExitBtn = styled.div`
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  transition: all 300ms ease-in-out;
 `;
