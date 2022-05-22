@@ -6,6 +6,32 @@ import { MapTogether } from "../components/mapTogether";
 import { HeaderComponent } from "../components/Header";
 import { FaSearch } from "react-icons/fa";
 
+const SearchParty = () => {
+  return (
+    <Wrapper>
+      <Container>
+        <HeaderComponent />
+        <SearchNearBy>
+          <Icon>
+            <FaSearch />
+          </Icon>
+          <Input name="taste" type="text" placeholder="좋아하는 음식을 입력하세요" />
+        </SearchNearBy>
+        <MapContainer>
+          <MapTogether />
+        </MapContainer>
+        <NavBar>
+          <Link to="/together/joinParty">
+            <Button>파티 생성하기</Button>
+          </Link>{" "}
+        </NavBar>
+      </Container>
+    </Wrapper>
+  );
+};
+
+export default SearchParty;
+
 const Wrapper = styled.section`
   background: white;
   display: flex;
@@ -20,6 +46,7 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  position: relative;
 `;
 
 const MapContainer = styled.div`
@@ -42,13 +69,14 @@ const NavBar = styled.div`
 `;
 
 const Button = styled.button`
-  width: 60%;
-  height: 40px;
+  width: 230px;
+  height: 50px;
   border-radius: 10px;
+  color: ${({ theme }) => theme.colors.WHITE_COLOR};
   background: ${({ theme }) => theme.colors.LIGHT_GREEN};
-  box-shadow: 2px 3px 2px rgba(0, 0, 0, 0.5);
-  color: white;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
   font-size: 1.2em;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -84,29 +112,3 @@ const Icon = styled.div`
   position: absolute;
   left: 15px;
 `;
-
-const SearchParty = () => {
-  return (
-    <Wrapper>
-      <Container>
-        <HeaderComponent />
-        <SearchNearBy>
-          <Icon>
-            <FaSearch />
-          </Icon>
-          <Input name="taste" type="text" placeholder="좋아하는 음식을 입력하세요" />
-        </SearchNearBy>
-        <MapContainer>
-          <MapTogether />
-        </MapContainer>
-        <NavBar>
-          <Button>
-            <Link to="/together/joinParty">내 파티 열기</Link>{" "}
-          </Button>
-        </NavBar>
-      </Container>
-    </Wrapper>
-  );
-};
-
-export default SearchParty;

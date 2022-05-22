@@ -104,13 +104,15 @@ export const MapTogether = () => {
       <div ref={mapRef} style={mapStyle}></div>
       {selectedPlace && (
         <PlaceInfo>
-          <PlaceName>{selectedPlace.place_name}</PlaceName>
+          <PlaceImg>파티 대표 이미지</PlaceImg>
+          <PlaceName>국밥 같이 먹으러 갈 사람~</PlaceName>
           <hr></hr>
-          <PlaceDetail>{selectedPlace.road_address_name}</PlaceDetail>
-          <PlaceDetail>{selectedPlace.phone}</PlaceDetail>
+          <PlaceDetail>국밥, 한식, 국물</PlaceDetail>
+          <PlaceDetail>모임 장소: </PlaceDetail>
+          <PlaceDetail>모임 시간: </PlaceDetail>
 
           <a href={selectedPlace.place_url}>
-            <StyleBtn>카카오 지도로 보기</StyleBtn>
+            <StyleBtn>파티 참가하기</StyleBtn>
           </a>
         </PlaceInfo>
       )}
@@ -121,11 +123,15 @@ export const MapTogether = () => {
 const PlaceInfo = styled.div`
   position: absolute;
   background-color: #ffffff;
-  bottom: 3vh;
+  top: 20vh;
+  right: 0;
+  left: 0;
+  margin: auto;
   z-index: 1;
-  width: 100%;
+  width: 220px;
   padding: 24px;
   border-radius: 16px;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
 `;
 const PlaceName = styled.div`
   font-size: 1.3rem;
@@ -134,13 +140,27 @@ const PlaceDetail = styled.div`
   font-size: 1.1rem;
   margin-bottom: 1vh;
 `;
+const PlaceImg = styled.div`
+  width: 90%;
+  height: 10vh;
+  border: 1px solid ${({ theme }) => theme.colors.GREY_COLOR};
+  border-radius: 10px;
+  background-color: ${({ theme }) => theme.colors.LIGHT_GREY};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+`;
 const StyleBtn = styled.button`
   width: 100%;
-  padding: 16px 0;
-  border: 3px solid ${({ theme }) => theme.colors.GREY_COLOR};
-  background-color: #f9e000;
+  padding: 10px 0;
+  border: 2px solid ${({ theme }) => theme.colors.LIGHT_GREEN};
+  background-color: ${({ theme }) => theme.colors.WHITE_COLOR};
+  color: ${({ theme }) => theme.colors.LIGHT_GREEN};
+  text-shadow: 0.5px 0.5px 0.5px rgba(0, 0, 0, 0.8);
   border-radius: 10px;
-  font-size: 20px;
+  font-size: 18px;
   margin-bottom: 10px;
   transition: all 300ms ease-in-out;
+  cursor: pointer;
 `;
