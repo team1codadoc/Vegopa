@@ -30,9 +30,9 @@ export const MapTogether = () => {
   const { kakao } = window;
   const mapRef = useRef<HTMLDivElement>(null);
   const [selectedPlace, setSelectedPlace] = useState<Place>();
-  const navigate = useNavigate();
   const { data, isLoading } = useQuery("", async () => axios.get("http://localhost:8080/api/food"));
-  console.log(data);
+  const img = data?.data.foods[3].image;
+
   const getLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -46,8 +46,8 @@ export const MapTogether = () => {
           const map = new kakao.maps.Map(container, options);
           const places = new kakao.maps.services.Places(map);
           const markerImg = new kakao.maps.MarkerImage(
-            "https://i.pinimg.com/564x/82/ba/16/82ba16b3093cf8e9a127a1a77763b721.jpg",
-            // img,
+            // "https://i.pinimg.com/564x/82/ba/16/82ba16b3093cf8e9a127a1a77763b721.jpg",
+            img,
             new kakao.maps.Size(64, 68),
             {
               shape: "poly",
@@ -72,7 +72,6 @@ export const MapTogether = () => {
             const marker = new kakao.maps.Marker({
               map: map,
               position: new kakao.maps.LatLng(place.y, place.x),
-              image: markerImg,
             });
             kakao.maps.event.addListener(marker, "click", function () {
               setSelectedPlace(place);
@@ -96,8 +95,8 @@ export const MapTogether = () => {
 
   // 지도 사이즈 관련 스타일
   const mapStyle = {
-    width: "100%",
-    height: "100%",
+    width: "100vw",
+    height: "100vh",
   };
 
   return (

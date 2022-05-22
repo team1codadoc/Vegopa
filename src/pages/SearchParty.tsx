@@ -133,10 +133,12 @@ const Home = styled.div`
 const Img = styled.img`
   width: 35px;
   height: 35px;
+  z-index: 20;
 `;
 const GoBack = styled.div`
   position: fixed;
   top: 15px;
   left: 15px;
   font-size: 1.8em;
+  z-index: 20;
 `;
