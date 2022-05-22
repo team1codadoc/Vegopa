@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import FoodSelectButton from "./foodSelectButton";
-import Navbar from "./navbar/Navbar";
+import FoodSelectButton from "../components/foodSelectPage/FoodSelectButton";
+import Navbar from "../components/navbar/Navbar";
 
 const foodQuestion = [
   {
@@ -67,7 +67,7 @@ const FoodSelectPage = () => {
   return (
     <SelectPageWrapper>
       <FoodSelectMain>
-        <Navbar />
+        <Navbar title="취향 분석" />
         <ProgressBar>
           <span>{questionNum + 1}/2</span>
           <Bar>
@@ -103,7 +103,7 @@ const NextButton = styled.button`
 const SelectWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  overflow: scroll;
+  overflow-y: scroll;
   height: 60%;
 `;
 

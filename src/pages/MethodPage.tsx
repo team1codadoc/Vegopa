@@ -2,13 +2,13 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { FaAngleRight } from "react-icons/fa";
-import heehee from "../img/charHeeHee.png";
 
-const Wrapper = styled.section`
+const Wrapper = styled.div`
   background: white;
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100%;
 `;
 
 const Container = styled.div`
@@ -75,7 +75,7 @@ const MethodChoice = () => {
             <Text>그냥 랜덤으로 추천해줘 </Text>
           </Button>
         </Link>
-        <Img src={heehee} />
+        <Img src={"/assets/charHeeHee.png"} />
         <Link to="/soloEat/1">
           <Button>
             <Title>고를래~</Title>

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
-import { mbtiQuestion } from "../../Constant/constant";
-import MbtiSelectButton from "./mbtiSelectButton";
-import Navbar from "./navbar/Navbar";
+import { mbtiQuestion } from "../Constant/constant";
+import MbtiSelectButton from "../components/mbtiSelectPage/MbtiSelectButton";
+import Navbar from "../components/navbar/Navbar";
 
 const MbtiSelectPage = () => {
   const location = useLocation();
@@ -15,7 +15,7 @@ const MbtiSelectPage = () => {
 
   return (
     <SelectPageWrapper>
-      <Navbar />
+      <Navbar title="음식 mbti" />
       <ProgressBar>
         <span>{presentQuestion}/4</span>
         <Bar>
@@ -48,6 +48,7 @@ const QuestionText = styled.h1`
 
 const SelectPageWrapper = styled.div`
   padding: 0 12px;
+  height: 100%;
 `;
 
 const ProgressBar = styled.div`
