@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import foodImage from "/assets/food/민초치킨.jpeg";
 import { FcShop } from "react-icons/fc";
 import Spinner from "../components/Spinner";
 import SnsShare from "../components/Sns-Share";
@@ -8,7 +7,7 @@ import { Link } from "react-router-dom";
 import { requestAPI } from "../api/Request";
 
 import { useQuery } from "react-query";
-import { FoodType } from "../api/api";
+import RetryButton from "../components/RetryButton";
 
 const ChoicResult = () => {
   const query = useQuery("foods", requestAPI.reqFoodAPI);
@@ -37,6 +36,7 @@ const ChoicResult = () => {
         </Button>
       </Link>
       <SnsShare />
+      <RetryButton />
     </Container>
   );
 };
