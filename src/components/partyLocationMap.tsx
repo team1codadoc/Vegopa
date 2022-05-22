@@ -114,6 +114,7 @@ export const PartyLocationMap = (props) => {
     </Container>
   );
 };
+
 PartyLocationMap.propTypes = {
   query: PropTypes.string,
   propFunc: PropTypes.func,
