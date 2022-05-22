@@ -5,19 +5,30 @@ import { FcShop } from "react-icons/fc";
 import Spinner from "../components/Spinner";
 import SnsShare from "../components/Sns-Share";
 import { Link } from "react-router-dom";
+import { requestAPI } from "../api/Request";
+
+import { useQuery } from "react-query";
+import { FoodType } from "../api/api";
 
 const ChoicResult = () => {
-  const [isPlaying, setIsplaying] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const query = useQuery("foods", requestAPI.reqFoodAPI);
+
+  if (query.isLoading) return <Spinner></Spinner>;
+
+  const length = query.data.data.foods.length;
+
+  const random = Math.floor(Math.random() * length);
   return (
     <Container>
       <h1 className="ir">골라줘 결과 사이트</h1>
       <TextContainer>
         <Comment>오늘은</Comment>
-        <Title>민초 치킨</Title>
+        <Title>{query.data.data.foods[random].title}</Title>
         <Comment>어때요?</Comment>
       </TextContainer>
-      <ImageWrapper>{loading ? <Spinner /> : <FoodImage src={foodImage} alt="food" />}</ImageWrapper>
+      <ImageWrapper>
+        {query.isLoading ? <Spinner /> : <FoodImage src={query.data.data.foods[random].image} alt="food" />}
+      </ImageWrapper>
       <Link to={"/restaurant"}>
         <Button type="button">
           <FcShop size="24" />
@@ -25,7 +36,6 @@ const ChoicResult = () => {
           <span>맛집 알아보기</span>
         </Button>
       </Link>
-
       <SnsShare />
     </Container>
   );

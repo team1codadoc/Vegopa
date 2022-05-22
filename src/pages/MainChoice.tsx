@@ -4,17 +4,17 @@ import { Link, useNavigate } from "react-router-dom";
 import { FaAngleRight, FaAngleLeft } from "react-icons/fa";
 
 const MainChoice = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   return (
     <Wrapper>
       <Container>
-        <GoBack>
+      <GoBack>
           <FaAngleLeft onClick={() => navigate(-1)} />
         </GoBack>
         <Button>
           <Link to="/method">
-            <Title>혼밥</Title>
             <Arrow>
+              <Title>혼밥</Title>
               <FaAngleRight />
             </Arrow>
             <Text>혼자 드시는 </Text>
@@ -24,8 +24,8 @@ const MainChoice = () => {
         <Img src={"/assets/charEating.png"} />
         <Button>
           <Link to="/together">
-            <Title>같이</Title>
             <Arrow>
+              <Title>같이</Title>
               <FaAngleRight />
             </Arrow>
             <Text>함께 먹을 친구</Text>
@@ -38,6 +38,8 @@ const MainChoice = () => {
 };
 
 export default MainChoice;
+
+
 
 const Wrapper = styled.div`
   height: 100%;
@@ -63,6 +65,7 @@ const Button = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
   &:first-child {
     margin-top: 40px;
   }
@@ -84,9 +87,10 @@ const Img = styled.img``;
 const Arrow = styled.div`
   width: 100%;
   display: flex;
-  justify-content: flex-end;
-  margin-right: 40px;
-  font-size: x-large;
+  font-size: 20px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 12px;
 `;
 const GoBack = styled.div`
   position: fixed;
@@ -94,3 +98,4 @@ const GoBack = styled.div`
   left: 15px;
   font-size: 1.8em;
 `;
+
