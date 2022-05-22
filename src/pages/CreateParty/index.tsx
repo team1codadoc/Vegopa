@@ -22,7 +22,7 @@ const Restaurant = () => {
   const [creator, setCreator] = useState("");
   const [total, setTotal] = useState(2);
   const [taste, setTaste] = useState([]);
-  const [meetingDate, setMeetingDate] = useState();
+  const [meetingDate, setMeetingDate] = useState<Date>();
   const [location, setLocation] = useState("");
   const [coordinates, setCoordinates] = useState({ lat: 0, lng: 0 });
 
@@ -47,6 +47,7 @@ const Restaurant = () => {
     const date = currentDate.getDate();
     const joinTime = time.split(":");
     const getTime = new Date(year, month, date, +joinTime[0], +joinTime[1]);
+    setMeetingDate(getTime);
   };
   useEffect(() => {
     changeDate();
