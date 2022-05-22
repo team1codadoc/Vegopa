@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 import { MapTogether } from "../components/mapTogether";
 import { HeaderComponent } from "../components/Header";
+import { FaSearch } from "react-icons/fa";
 
 const Wrapper = styled.section`
   background: white;
@@ -54,14 +55,47 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
-const SearchNearBy = styled.form``;
+const SearchNearBy = styled.form`
+  width: 80%;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 60px;
+  right: 0;
+  left: 0;
+  margin: auto;
+`;
+const Input = styled.input`
+  width: 100%;
+  background-color: white;
+  border-radius: 10px;
+  border: 1px solid ${({ theme }) => theme.colors.LIGHT_GREY};
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);
+  padding: 10px 40px;
+  position: absolute;
+  z-index: 100;
+`;
+const Icon = styled.div`
+  width: 20px;
+  height: 20px;
+  z-index: 101;
+  position: absolute;
+  left: 15px;
+`;
 
 const SearchParty = () => {
   return (
     <Wrapper>
       <Container>
         <HeaderComponent />
-        <SearchNearBy></SearchNearBy>
+        <SearchNearBy>
+          <Icon>
+            <FaSearch />
+          </Icon>
+          <Input name="taste" type="text" placeholder="좋아하는 음식을 입력하세요" />
+        </SearchNearBy>
         <MapContainer>
           <MapTogether />
         </MapContainer>
