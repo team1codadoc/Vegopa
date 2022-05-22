@@ -10,6 +10,7 @@ import MainChoice from "../pages/MainChoice";
 import MethodChoice from "../pages/MethodPage";
 import EatTogether from "../pages/TogetherPage";
 import Main from "../pages/MainPage";
+import SearchParty from "../pages/SearchParty";
 
 const RootRoute = () => {
   return (
@@ -25,6 +26,7 @@ const RootRoute = () => {
         <Route path="/soloEat/:problem" element={<FoodSelectPage />} />
         <Route path="/method" element={<MethodChoice />} />
         <Route path="/together" element={<EatTogether />} />
+        <Route path="/together/searchParty" element={<SearchParty />} />
       </Routes>
     </BrowserRouter>
   );

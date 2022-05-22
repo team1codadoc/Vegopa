@@ -23,7 +23,7 @@ type Place = {
   y: string;
 };
 
-export const Map = () => {
+export const MapTogether = () => {
   const query = "치킨";
   const { kakao } = window;
   const mapRef = useRef<HTMLDivElement>(null);
