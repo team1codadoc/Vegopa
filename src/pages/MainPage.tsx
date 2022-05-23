@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import Logo from "/assets/vegopa.png";
 import { FaAngleRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
@@ -35,8 +34,9 @@ const MenuRecommendBtn = styled.button`
   width: 175px;
   height: 48px;
   border-radius: 20px;
+  font-weight: bold;
   font-size: 1.2rem;
-  background-color: ${({ theme }) => theme.colors.DARK_GRAY};
+  background-color: ${({ theme }) => theme.colors.LIGHT_GREEN};
   margin-top: 80px;
 `;
 

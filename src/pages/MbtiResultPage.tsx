@@ -49,6 +49,9 @@ export const MbtiResultPage = () => {
         <ShareContainer>
           <img src="/assets/chain_icon.png" alt="share link" />
           <img className="share-kakao" src={kakaoIcon} alt="kakao-share" />
+          <a id="kakao-link-btn" href="javascript:sendLink()">
+            <img src="https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png" />
+          </a>
           <img className="share-facebook" src={facebookIcon} alt="facebook-share" />
           <img className="share-twitter" src={twitterIcon} alt="twitter-share" />
         </ShareContainer>
@@ -194,11 +197,12 @@ const RecommendButton = styled.button`
   height: 58px;
   border-radius: 20px;
   margin: auto;
-  background-color: #f1f1f1;
+  background-color: ${({ theme }) => theme.colors.LIGHT_GREEN};
   text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 20px;
   font-family: "TmoneyRoundWindExtraBold";
+  cursor: pointer;
 `;

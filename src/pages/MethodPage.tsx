@@ -5,38 +5,37 @@ import { FaAngleRight, FaAngleLeft } from "react-icons/fa";
 
 const MethodChoice = () => {
   const navigate = useNavigate();
-    return (
-      <Wrapper>
-        <Container>
+  return (
+    <Wrapper>
+      <Container>
         <GoBack>
-            <FaAngleLeft onClick={() => navigate(-1)} />
-          </GoBack>
-          <Link to="/soloEat/loading">
-            <Button>
-              <Title>골라줘!</Title>
-              <Arrow>
-                <FaAngleRight />
-              </Arrow>
-              <Text>그냥 랜덤으로 추천해줘 </Text>
-            </Button>
-          </Link>
-          <Img src={"/assets/charHeeHee.png"} />
-          <Link to="/soloEat/1">
-            <Button>
-              <Title>고를래~</Title>
-              <Arrow>
-                <FaAngleRight />
-              </Arrow>
-              <Text>내 취향대로 추천 받을래</Text>
-            </Button>
-          </Link>
-        </Container>
-      </Wrapper>
-    );
-  };
-  
-  export default MethodChoice;
-  
+          <FaAngleLeft onClick={() => navigate(-1)} />
+        </GoBack>
+        <Link to="/soloEat/loading">
+          <Button>
+            <Title>골라줘!</Title>
+            <Arrow>
+              <FaAngleRight />
+            </Arrow>
+            <Text>그냥 랜덤으로 추천해줘 </Text>
+          </Button>
+        </Link>
+        <Img src={"/assets/charHeeHee.png"} />
+        <Link to="/soloEat/1">
+          <Button>
+            <Title>고를래~</Title>
+            <Arrow>
+              <FaAngleRight />
+            </Arrow>
+            <Text>내 취향대로 추천 받을래</Text>
+          </Button>
+        </Link>
+      </Container>
+    </Wrapper>
+  );
+};
+
+export default MethodChoice;
 
 const Wrapper = styled.div`
   background: white;
@@ -60,7 +59,7 @@ const Button = styled.div`
   width: 230px;
   height: 140px;
   border-radius: 10px;
-  background: #ead1d1;
+  background-color: ${({ theme }) => theme.colors.LIGHT_GREEN};
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -103,4 +102,3 @@ const GoBack = styled.div`
   left: 15px;
   font-size: 1.8em;
 `;
-

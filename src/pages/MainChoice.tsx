@@ -60,7 +60,7 @@ const Button = styled.div`
   width: 230px;
   height: 140px;
   border-radius: 10px;
-  background: #f1f1f1;
+  background-color: ${({ theme }) => theme.colors.LIGHT_GREEN};
   display: flex;
   flex-direction: column;
   justify-content: center;
