@@ -13,6 +13,7 @@ import Login from "../pages/login";
 import SignIn from "../pages/signin";
 import Main from "../pages/MainPage";
 import SearchParty from "../pages/SearchParty";
+import CreateParty from "../pages/CreateParty";
 
 const RootRoute = () => {
   return (
@@ -20,7 +21,7 @@ const RootRoute = () => {
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/mainChoice" element={<MainChoice />} />
-        <Route path="/restaurant" element={<Restaurant />} />
+        <Route path="/restaurant/:query" element={<Restaurant />} />
         <Route path="/select/result" element={<MbtiResultPage />} />
         <Route
           path="/select/loading"
@@ -38,6 +39,7 @@ const RootRoute = () => {
         <Route path="/together/login" element={<Login />} />
         <Route path="/together/signin" element={<SignIn />} />
         <Route path="/together/searchParty" element={<SearchParty />} />
+        <Route path="/together/createParty" element={<CreateParty />} />
       </Routes>
     </BrowserRouter>
   );

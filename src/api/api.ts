@@ -1,6 +1,7 @@
 /* eslint-disable indent */
 import axios, { AxiosInstance } from "axios";
 import { tokenStorage } from "../store/token";
+import { setInterceptors } from "./interceptors";
 
 export type FoodType = {
   _id: number;
@@ -27,6 +28,9 @@ export default class Request {
   constructor(domain: string) {
     this.req = axios.create({
       baseURL: domain,
+      headers: {
+        "Content-Type": "application/json; charset=UTF-8",
+      },
     });
   }
 
@@ -47,4 +51,5 @@ export default class Request {
   reqUserNameValid = (body) => this.req.post("/api/user/accountValid", body);
   reqUserInfo = () =>
     this.req.get(`/api/user/profile/${tokenStorage.getUserName()}`, { headers: this.getUserAuthHeader() });
+  reqCreatePartyAPI = (body) => setInterceptors(this.req).post("/api/party", body);
 }
