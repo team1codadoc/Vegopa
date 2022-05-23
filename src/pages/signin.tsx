@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { requestAPI } from "../api/Request";
+import { FaDAndD } from "react-icons/fa";
 
 const SignIn = () => {
   const navigator = useNavigate();
@@ -44,13 +45,13 @@ const SignIn = () => {
       ...error,
       email: { format: !regEmail.test(email) },
       password: {
-        length: password.length < 5,
+        length: password.length <= 5,
         confirm: password !== confirmPassword,
       },
       username: Boolean(!username),
     });
 
-    return regEmail.test(email) && password.length > 5 && password === confirmPassword && Boolean(username) && email;
+    return regEmail.test(email) && password.length >= 5 && password === confirmPassword && Boolean(username) && email;
   };
 
   const signSubmitHandler: React.FormEventHandler<HTMLFormElement> = (e) => {
@@ -109,37 +110,38 @@ const SignIn = () => {
         <div className="SignInText">회원가입</div>
         <form onSubmit={signSubmitHandler}>
           <Email>
-            <div className="EmailText">이메일</div>
-            <input placeholder="ex) abcdefgh@email.com" type="email" onChange={(e) => setEmail(e.target.value)} />
-            <button type="button" onClick={handleEmailValidButton}>
-              중복확인
-            </button>
-            {error.email.format && <span>이메일 형식이 아닙니다.</span>}
-            {emailValid.valid && <span>{emailValid.text}</span>}
+            <div className="formsText">이메일</div>
+            <div className="emailContainer">
+              <input placeholder="ex) abcdefgh@email.com" type="email" onChange={(e) => setEmail(e.target.value)} />
+              <button className="repititiveCheck" type="button" onClick={handleEmailValidButton}>
+                중복확인
+              </button>
+            </div>
+            {error.email.format && <div className="errorText">이메일 형식이 아닙니다.</div>}
+            {emailValid.valid && <div className="successText">{emailValid.text}</div>}
           </Email>
           <Password>
-            <div className="PasswordText">비밀번호</div>
+            <div className="formsText">비밀번호</div>
             <input minLength={5} type="password" />
-            {error.password.length && <span>비밀번호는 5글자 이상이여야합니다.</span>}
-            {error.password.confirm && <span>비밀번호와 재확인 비밀번호를 확인해주십시오</span>}
+            {error.password.length && <div className="errorText">비밀번호는 5글자 이상이여야합니다.</div>}
           </Password>
-
           <PasswordConfirm>
-            <div className="PasswordConfirmText">비밀번호 재확인</div>
+            <div className="formsText">비밀번호 재확인</div>
             <input minLength={5} type="password" />
-            {error.password.confirm && <span>비밀번호와 재확인 비밀번호를 확인해주십시오</span>}
+            {error.password.confirm && <div className="errorText">비밀번호가 일치하지 않습니다.</div>}
           </PasswordConfirm>
           <NickName>
-            <div className="NickNameText">닉네임</div>
+            <div className="formsText">닉네임</div>
             <input minLength={2} type="text" onChange={(e) => setUsername(e.target.value)} />
-            <button type="button" onClick={handleUserNameValidButton}>
+            <button className="repititiveCheck" type="button" onClick={handleUserNameValidButton}>
               중복확인
             </button>
-            {error.username && <span>유저 이름을 입력해주세요.</span>}
+            {error.username && <div className="errorText">유저 이름을 입력해주세요.</div>}
           </NickName>
           <AvatarChoose>
-            <div className="AvatarChooseText">아바타 선택</div>
-            <input type="file" onChange={fileUploadHandler} />
+            <div className="formsText">아바타 선택</div>
+            <label htmlFor="file">업로드</label>
+            <input style={{ display: "none" }} onChange={fileUploadHandler} type="file" id="file"></input>
           </AvatarChoose>
           <button type="submit" onClick={SignInButtonHandler}>
             가입하기
@@ -166,7 +168,6 @@ const SignInForm = styled.div`
   margin: auto;
   background-color: white;
   border-radius: 10px;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   .SignInText {
     font-size: 30px;
     text-align: center;
@@ -178,10 +179,30 @@ const SignInForm = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-align: center;
+    .repititiveCheck {
+      font-size: 10px;
+      padding: 8px 8px;
+      margin-left: 10px;
+    }
+    .formsText {
+      text-align: start;
+    }
+    .successText {
+      font-size: 12px;
+      color: RGB(50, 174, 37);
+      text-align: start;
+      margin-top: 10px;
+    }
+    .errorText {
+      font-size: 12px;
+      color: red;
+      text-align: start;
+      margin-top: 10px;
+    }
     input {
-      margin-bottom: 40px;
       height: 30px;
-      width: 200px;
+      width: 250px;
       border: none;
       border-bottom: 1px solid black;
       outline: none;
@@ -201,12 +222,48 @@ const SignInForm = styled.div`
   }
 `;
 
-const Email = styled.div``;
+const Email = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 311px;
+  padding: 15px 0;
 
-const Password = styled.div``;
+  .emailContainer {
+    display: flex;
+    justify-content: flex-start;
+  }
+`;
 
-const PasswordConfirm = styled.div``;
+const Password = styled.div`
+  width: 311px;
+  text-align: start;
+  padding: 15px 0;
+`;
 
-const NickName = styled.div``;
+const PasswordConfirm = styled.div`
+  width: 311px;
+  text-align: start;
+  padding: 15px 0;
+`;
 
-const AvatarChoose = styled.div``;
+const NickName = styled.div`
+  width: 311px;
+  padding: 15px 0;
+`;
+
+const AvatarChoose = styled.div`
+  width: 311px;
+  text-align: start;
+  padding: 15px 0;
+  margin-bottom: 15px;
+  .formsText {
+    margin-bottom: 10px;
+  }
+  label {
+    font-size: 20px;
+    border: 1px solid black;
+    cursor: pointer;
+    padding: 3px;
+    border-radius: 8px;
+  }
+`;
