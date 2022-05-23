@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { PartyLocationMap } from "../../components/partyLocationMap";
-import PropTypes from "prop-types";
+import { PartyLocationMap } from "../components/partyLocationMap";
 
 type partyInform = {
   title: string;
