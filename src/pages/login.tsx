@@ -1,25 +1,40 @@
 import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { requestAPI } from "../api/Request";
 
 const Login = () => {
   const navigator = useNavigate();
   const SignInButtonHandler = () => {
     navigator("/together/signin");
   };
+
+  const LogInHandler: React.FormEventHandler<HTMLFormElement> = async (e) => {
+    e.preventDefault();
+    const body = {
+      email: e.target[0].value,
+      password: e.target[1].value,
+    };
+
+    const result = await requestAPI.reqLogIn(body);
+
+    console.log(result.data.user.token);
+  };
   return (
     <LoginWrapper>
       <LoginForm>
         <LoginHeader>로그인</LoginHeader>
         <LoginMain>
-          <form>
+          <form onSubmit={LogInHandler}>
             <div className="wrapper">
               <input placeholder="아이디" type="text" name="userName" />
             </div>
             <div className="wrapper">
               <input placeholder="비밀번호" type="password" name="password" />
             </div>
-            <button className="login-button">로그인</button>
+            <button type="submit" className="login-button">
+              로그인
+            </button>
           </form>
           <SignInText>아직 회원이 아니신가요?</SignInText>
           <SignInState onClick={SignInButtonHandler}>회원가입</SignInState>

@@ -5,6 +5,14 @@ export type FoodType = {
   title: string;
   image: string;
 };
+export type userType = {
+  user: {
+    avatar: string;
+    email: string;
+    token: string;
+    username: string;
+  };
+};
 
 export default class Request {
   public req: AxiosInstance;
@@ -15,4 +23,5 @@ export default class Request {
   }
 
   reqFoodAPI = () => this.req.get<{ foods: FoodType[] }>("/api/food");
+  reqLogIn = (body) => this.req.post<userType>("/api/user/login", body);
 }
