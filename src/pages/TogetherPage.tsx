@@ -37,11 +37,11 @@ function Together() {
 export default Together;
 
 const Wrapper = styled.div`
-  background: white;
+  background: black;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%;
+  height: 100vh;
 `;
 const Container = styled.div`
   max-width: 621px;

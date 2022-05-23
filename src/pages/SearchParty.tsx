@@ -1,27 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
+import { FaSearch, FaAngleLeft } from "react-icons/fa";
 
 import { MapTogether } from "../components/mapTogether";
-import { FaSearch, FaAngleLeft } from "react-icons/fa";
+import { Input } from "../components/Input";
 
 const SearchParty = () => {
   const navigate = useNavigate();
   return (
     <Wrapper>
       <Container>
-        <GoBack>
-          <FaAngleLeft onClick={() => navigate(-1)} />
-        </GoBack>
-        <Home>
-          <Img src={"/assets/home_icon.png"} />
-        </Home>
-        <SearchNearBy>
-          <Icon>
-            <FaSearch />
-          </Icon>
-          <Input name="taste" type="text" placeholder="좋아하는 음식을 입력하세요" />
-        </SearchNearBy>
+        <Header>
+          <GoBack>
+            <FaAngleLeft onClick={() => navigate(-1)} />
+          </GoBack>
+          <a href="/">
+            <Home>
+              <Img src={"/assets/home_icon.png"} />
+            </Home>
+          </a>
+        </Header>
+        <Input />
         <MapContainer>
           <MapTogether />
         </MapContainer>
@@ -39,14 +39,15 @@ export default SearchParty;
 
 const Wrapper = styled.div`
   background: white;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%;
 `;
-
 const Container = styled.div`
   max-width: 621px;
+  width: 250px;
+  height: 390px;
   margin: auto;
   background-color: #fff;
   display: flex;
@@ -54,15 +55,17 @@ const Container = styled.div`
   justify-content: space-between;
   align-items: center;
 `;
-
-const MapContainer = styled.div`
+const Header = styled.div`
   width: inherit;
+  height: 35px;
+`;
+const MapContainer = styled.div`
+  width: 100%;
   height: 100%;
   position: absolute;
   top: 0;
   z-index: 0;
 `;
-
 const NavBar = styled.div`
   width: inherit;
   height: 120px;
@@ -73,7 +76,6 @@ const NavBar = styled.div`
   align-items: center;
   z-index: 100;
 `;
-
 const Button = styled.button`
   width: 230px;
   height: 50px;
@@ -96,39 +98,11 @@ const Button = styled.button`
   }
 `;
 
-const SearchNearBy = styled.form`
-  width: 80%;
-  height: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  top: 60px;
-  right: 0;
-  left: 0;
-  margin: auto;
-`;
-const Input = styled.input`
-  width: 100%;
-  background-color: white;
-  border-radius: 10px;
-  border: 1px solid ${({ theme }) => theme.colors.LIGHT_GREY};
-  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);
-  padding: 10px 40px;
-  position: absolute;
-  z-index: 100;
-`;
-const Icon = styled.div`
-  width: 20px;
-  height: 20px;
-  z-index: 101;
-  position: absolute;
-  left: 15px;
-`;
 const Home = styled.div`
   position: absolute;
   right: 20px;
   top: 10px;
+  z-index: 1;
 `;
 const Img = styled.img`
   width: 35px;

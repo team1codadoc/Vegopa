@@ -4,11 +4,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { FaAngleRight, FaAngleLeft } from "react-icons/fa";
 
 const MainChoice = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   return (
     <Wrapper>
       <Container>
-      <GoBack>
+        <GoBack>
           <FaAngleLeft onClick={() => navigate(-1)} />
         </GoBack>
         <Button>
@@ -23,7 +23,7 @@ const MainChoice = () => {
         </Button>
         <Img src={"/assets/charEating.png"} />
         <Button>
-          <Link to="/together">
+          <Link to="/together/login">
             <Arrow>
               <Title>같이</Title>
               <FaAngleRight />
@@ -38,8 +38,6 @@ const MainChoice = () => {
 };
 
 export default MainChoice;
-
-
 
 const Wrapper = styled.div`
   height: 100%;
@@ -98,4 +96,3 @@ const GoBack = styled.div`
   left: 15px;
   font-size: 1.8em;
 `;
-
