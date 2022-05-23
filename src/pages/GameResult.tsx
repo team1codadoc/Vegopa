@@ -35,7 +35,6 @@ const ChoicResult = () => {
           <span>맛집 알아보기</span>
         </Button>
       </Link>
-      <SnsShare />
       <RetryButton />
     </Container>
   );

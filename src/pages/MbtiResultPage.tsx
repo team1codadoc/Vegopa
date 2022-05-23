@@ -47,13 +47,8 @@ export const MbtiResultPage = () => {
       <div>
         <RetryButton />
         <ShareContainer>
-          <img src="/assets/chain_icon.png" alt="share link" />
-          <img className="share-kakao" src={kakaoIcon} alt="kakao-share" />
-          <a id="kakao-link-btn" href="javascript:sendLink()">
-            <img src="https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png" />
-          </a>
-          <img className="share-facebook" src={facebookIcon} alt="facebook-share" />
-          <img className="share-twitter" src={twitterIcon} alt="twitter-share" />
+          <img onClick={shareFacebook} className="share-facebook" src={facebookIcon} alt="facebook-share" />
+          <img onClick={shareTwitter} className="share-twitter" src={twitterIcon} alt="twitter-share" />
         </ShareContainer>
         <Link to="/soloEat/loading">
           <RecommendButton>메뉴 추천받기</RecommendButton>
@@ -62,6 +57,17 @@ export const MbtiResultPage = () => {
     </ResultPageWrapper>
   );
 };
+
+function shareTwitter() {
+  const sendText = "Vaegopa";
+  const sendUrl = "https://vegopa-avdow676x-codadoc.vercel.app/";
+  window.open("https://twitter.com/intent/tweet?text=" + sendText + "&url=" + sendUrl);
+}
+
+function shareFacebook() {
+  const sendUrl = "https://vegopa-avdow676x-codadoc.vercel.app/";
+  window.open("http://www.facebook.com/sharer/sharer.php?u=" + sendUrl);
+}
 
 export default MbtiResultPage;
 const ResultPageWrapper = styled.div`
