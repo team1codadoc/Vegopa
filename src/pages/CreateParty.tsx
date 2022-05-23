@@ -46,9 +46,10 @@ const Restaurant = () => {
   };
 
   const [time, setTime] = useState("");
-
+  const [currentTime, setCurrentTime] = useState("");
   const changeDate = () => {
     const currentDate = new Date();
+
     const year = currentDate.getFullYear();
     const month = currentDate.getMonth();
     const date = currentDate.getDate();
@@ -76,8 +77,6 @@ const Restaurant = () => {
     data.append("upload_preset", "dtsaonv8");
     console.log(data);
     const cloudName = import.meta.env.VITE_CLOUD_NAME;
-    // const cloudName = "deiyompy0";
-
     const res = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/upload`, {
       method: "POST",
       body: data,
@@ -129,7 +128,6 @@ const Restaurant = () => {
                   setTitle(e.target.value);
                 }}
               ></input>
-              <button>중복확인</button>
             </PartyTitle>
             <LimitedNumber>
               <Title>파티인원</Title>
@@ -297,10 +295,10 @@ const LimitedNumber = styled.div`
   padding: 0 0 30px 0;
   display: flex;
   input {
-    width: 150px;
+    width: 145px;
   }
   p {
-    margin-left: 15px;
+    margin-left: 10px;
   }
 `;
 const Taste = styled.div`
@@ -389,7 +387,7 @@ const Register = styled.div`
   }
 `;
 const Title = styled.div`
-  width: 28%;
+  width: 30%;
   font-size: 1.1rem;
 `;
 const GoBack = styled.div`

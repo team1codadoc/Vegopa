@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import styled from "styled-components";
 import Spinner from "./Spinner";
 import home_icon from "/assets/home_icon.png";
@@ -26,11 +26,11 @@ type Place = {
 };
 
 export const Map = () => {
-  const query = "치킨";
   const { kakao } = window;
   const mapRef = useRef<HTMLDivElement>(null);
   const [selectedPlace, setSelectedPlace] = useState<Place>();
   const [isLoading, setIsLoading] = useState(false);
+  const { query } = useParams();
 
   const getLocation = () => {
     if (navigator.geolocation) {

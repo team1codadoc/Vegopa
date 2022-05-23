@@ -21,7 +21,7 @@ const RootRoute = () => {
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/mainChoice" element={<MainChoice />} />
-        <Route path="/restaurant" element={<Restaurant />} />
+        <Route path="/restaurant/:query" element={<Restaurant />} />
         <Route path="/select/result" element={<MbtiResultPage />} />
         <Route
           path="/select/loading"

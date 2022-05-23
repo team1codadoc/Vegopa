@@ -28,7 +28,7 @@ const ChoicResult = () => {
       <ImageWrapper>
         {query.isLoading ? <Spinner /> : <FoodImage src={query.data.data.foods[random].image} alt="food" />}
       </ImageWrapper>
-      <Link to={"/restaurant"}>
+      <Link to={`/restaurant/${query.data.data.foods[random].title}`}>
         <Button type="button">
           <FcShop size="24" />
           <span className="ir">근처 맛집보기 버튼</span>
