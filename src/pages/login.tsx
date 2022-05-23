@@ -22,6 +22,7 @@ const Login = () => {
     };
 
     const result = await requestAPI.reqLogIn(body);
+    tokenStorage.setUsername(result.data.user.username);
     tokenStorage.setAuthToken(result.data.user.token);
     navigator("/together");
   };

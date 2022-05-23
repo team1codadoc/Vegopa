@@ -2,9 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import { FaAngleRight, FaAngleLeft } from "react-icons/fa";
+import { requestAPI } from "../api/Request";
 
 function Together() {
   const navigate = useNavigate();
+  requestAPI.reqUserInfo();
   return (
     <Wrapper>
       <Container>

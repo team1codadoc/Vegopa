@@ -1,9 +1,8 @@
 /* eslint-disable no-useless-escape */
-import React, { useContext, useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { requestAPI } from "../api/Request";
-import { FaDAndD } from "react-icons/fa";
 
 const SignIn = () => {
   const navigator = useNavigate();
@@ -22,9 +21,13 @@ const SignIn = () => {
   };
   const [imgUrl, setImgUrl] = useState("");
   const [emailValid, setEmailValid] = useState({ text: "", valid: false });
+  const [usernameValid, setUsernameValid] = useState({ text: "", valid: false });
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [error, setError] = useState(initialError);
+
+  const correctNickname = "사용 가능한 닉네임 입니다.";
+  const correctEmail = "사용 가능한 이메일 입니다.";
 
   const fileUploadHandler: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     const file = e.target.files[0];
@@ -41,8 +44,8 @@ const SignIn = () => {
     });
   };
   const validation = (email: string, password: string, confirmPassword: string, username: string) => {
+    console.log(password, password !== confirmPassword);
     setError({
-      ...error,
       email: { format: !regEmail.test(email) },
       password: {
         length: password.length <= 5,
@@ -51,16 +54,25 @@ const SignIn = () => {
       username: Boolean(!username),
     });
 
-    return regEmail.test(email) && password.length >= 5 && password === confirmPassword && Boolean(username) && email;
+    return (
+      regEmail.test(email) &&
+      password.length > 5 &&
+      password === confirmPassword &&
+      Boolean(username) &&
+      usernameValid.text === correctNickname &&
+      emailValid.text === correctEmail
+    );
   };
 
   const signSubmitHandler: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     const from = e.target;
+
+    console.log(from[1]);
     const email = from[0].value;
-    const password = from[1].value;
-    const confirmPassword = from[2].value;
-    const username = from[3].value;
+    const password = from[2].value;
+    const confirmPassword = from[3].value;
+    const username = from[4].value;
 
     if (validation(email, password, confirmPassword, username)) {
       requestAPI
@@ -70,7 +82,9 @@ const SignIn = () => {
           password,
           username,
         })
-        .then((res) => console.log(res));
+        .then(() => {
+          navigator("/together/login");
+        });
     }
   };
 
@@ -94,16 +108,13 @@ const SignIn = () => {
     requestAPI
       .reqUserNameValid({ username })
       .then((res) => {
-        console.log({ text: res.data.message, valid: true });
+        setUsernameValid({ text: res.data.message, valid: true });
       })
       .catch((e) => {
-        console.log({ text: e.response.data.message, valid: true });
+        setUsernameValid({ text: e.response.data.message, valid: true });
       });
   };
 
-  const SignInButtonHandler = () => {
-    // navigator("/together/login"); // if 아이디
-  };
   return (
     <SignInWrapper>
       <SignInForm>
@@ -118,7 +129,9 @@ const SignIn = () => {
               </button>
             </div>
             {error.email.format && <div className="errorText">이메일 형식이 아닙니다.</div>}
-            {emailValid.valid && <div className="successText">{emailValid.text}</div>}
+            {emailValid.valid && (
+              <div className={emailValid.text === correctEmail ? "successText" : "errorText"}>{emailValid.text}</div>
+            )}
           </Email>
           <Password>
             <div className="formsText">비밀번호</div>
@@ -136,16 +149,19 @@ const SignIn = () => {
             <button className="repititiveCheck" type="button" onClick={handleUserNameValidButton}>
               중복확인
             </button>
+            {usernameValid.valid && (
+              <div className={usernameValid.text === correctNickname ? "successText" : "errorText"}>
+                {usernameValid.text}
+              </div>
+            )}
             {error.username && <div className="errorText">유저 이름을 입력해주세요.</div>}
           </NickName>
           <AvatarChoose>
             <div className="formsText">아바타 선택</div>
-            <label htmlFor="file">업로드</label>
+            <label htmlFor="file">{imgUrl ? imgUrl : "업로드"}</label>
             <input style={{ display: "none" }} onChange={fileUploadHandler} type="file" id="file"></input>
           </AvatarChoose>
-          <button type="submit" onClick={SignInButtonHandler}>
-            가입하기
-          </button>
+          <button type="submit">가입하기</button>
         </form>
       </SignInForm>
     </SignInWrapper>
@@ -260,6 +276,11 @@ const AvatarChoose = styled.div`
     margin-bottom: 10px;
   }
   label {
+    overflow: hidden;
+    max-width: 85%;
+    display: block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
     font-size: 20px;
     border: 1px solid black;
     cursor: pointer;

@@ -35,7 +35,7 @@ export default class Request {
 
     return userAuthToken
       ? {
-          Authorization: "Bearer " + userAuthToken,
+          Authorization: "Bearer" + userAuthToken,
         }
       : {};
   };
@@ -45,4 +45,6 @@ export default class Request {
   reqSignUp = (body: signUpBodyType) => this.req.post("/api/user/signup", body);
   reqEmailValid = (body) => this.req.post("/api/user/emailValid", body);
   reqUserNameValid = (body) => this.req.post("/api/user/accountValid", body);
+  reqUserInfo = () =>
+    this.req.get(`/api/user/profile/${tokenStorage.getUserName()}`, { headers: this.getUserAuthHeader() });
 }
