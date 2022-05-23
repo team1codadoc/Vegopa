@@ -44,4 +44,5 @@ export default class Request {
   reqLogIn = (body) => this.req.post<userType>("/api/user/login", body);
   reqSignUp = (body: signUpBodyType) => this.req.post("/api/user/signup", body);
   reqEmailValid = (body) => this.req.post("/api/user/emailValid", body);
+  reqUserNameValid = (body) => this.req.post("/api/user/accountValid", body);
 }

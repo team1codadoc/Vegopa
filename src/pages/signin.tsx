@@ -22,6 +22,7 @@ const SignIn = () => {
   const [imgUrl, setImgUrl] = useState("");
   const [emailValid, setEmailValid] = useState({ text: "", valid: false });
   const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [error, setError] = useState(initialError);
 
   const fileUploadHandler: React.ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -88,6 +89,17 @@ const SignIn = () => {
       });
   };
 
+  const handleUserNameValidButton = () => {
+    requestAPI
+      .reqUserNameValid({ username })
+      .then((res) => {
+        console.log({ text: res.data.message, valid: true });
+      })
+      .catch((e) => {
+        console.log({ text: e.response.data.message, valid: true });
+      });
+  };
+
   const SignInButtonHandler = () => {
     // navigator("/together/login"); // if 아이디
   };
@@ -119,7 +131,10 @@ const SignIn = () => {
           </PasswordConfirm>
           <NickName>
             <div className="NickNameText">닉네임</div>
-            <input minLength={2} type="text" />
+            <input minLength={2} type="text" onChange={(e) => setUsername(e.target.value)} />
+            <button type="button" onClick={handleUserNameValidButton}>
+              중복확인
+            </button>
             {error.username && <span>유저 이름을 입력해주세요.</span>}
           </NickName>
           <AvatarChoose>
