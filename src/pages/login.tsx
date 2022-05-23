@@ -1,25 +1,59 @@
-import React, { useContext, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { requestAPI } from "../api/Request";
+import { tokenStorage } from "../store/token";
 
 const Login = () => {
   const navigator = useNavigate();
+
+  const [emailState, setEmail] = useState("");
+  const [passwordState, setPassword] = useState("");
+
   const SignInButtonHandler = () => {
     navigator("/together/signin");
   };
+
+  const LogInHandler: React.FormEventHandler<HTMLFormElement> = async (e) => {
+    e.preventDefault();
+    const body = {
+      email: e.target[0].value,
+      password: e.target[1].value,
+    };
+
+    const result = await requestAPI.reqLogIn(body);
+    tokenStorage.setUsername(result.data.user.username);
+    tokenStorage.setAuthToken(result.data.user.token);
+    navigator("/together");
+  };
+
+  function validation(email: string, password: string) {
+    const len = email.length;
+    const passwordLen = password.length;
+
+    return len > 3 && passwordLen > 3;
+  }
+
   return (
     <LoginWrapper>
       <LoginForm>
         <LoginHeader>로그인</LoginHeader>
         <LoginMain>
-          <form>
+          <form onSubmit={LogInHandler}>
             <div className="wrapper">
-              <input placeholder="아이디" type="text" name="userName" />
+              <input onChange={(e) => setEmail(e.target.value)} placeholder="아이디" type="text" name="userName" />
             </div>
             <div className="wrapper">
-              <input placeholder="비밀번호" type="password" name="password" />
+              <input
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="비밀번호"
+                type="password"
+                name="password"
+              />
             </div>
-            <button className="login-button">로그인</button>
+            <button disabled={!validation(emailState, passwordState)} type="submit" className="login-button">
+              로그인
+            </button>
           </form>
           <SignInText>아직 회원이 아니신가요?</SignInText>
           <SignInState onClick={SignInButtonHandler}>회원가입</SignInState>
@@ -120,6 +154,10 @@ const LoginMain = styled.div`
       cursor: pointer;
       font-size: 20px;
       border-radius: 10px;
+      transition: color 300ms ease-in-out;
+      &:disabled {
+        background-color: ${({ theme }) => theme.colors.LIGHT_GREY};
+      }
     }
   }
 `;

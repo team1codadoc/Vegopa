@@ -6,6 +6,18 @@ import Navbar from "../components/navbar/Navbar";
 
 const foodQuestion = [
   {
+    question: "어떤 음식을 먹고 싶으신가요? 최대 2가지를 선택해주세요",
+    answerNumber: 2,
+    selects: [
+      { text: "한식", id: 1, selected: false },
+      { text: "중식", id: 2, selected: false },
+      { text: "일식", id: 3, selected: false },
+      { text: "패스트 푸드", id: 4, selected: false },
+      { text: "야식", id: 5, selected: false },
+      { text: "분식", id: 6, selected: false },
+    ],
+  },
+  {
     question: "어떤 음식을 더 좋아하세요 최대 4가지를 선택해주세요",
     answerNumber: 4,
     selects: [
@@ -19,18 +31,6 @@ const foodQuestion = [
       { text: "짬뽕", id: 8, selected: false },
       { text: "일본식 라멘", id: 9, selected: false },
       { text: "족발", id: 10, selected: false },
-    ],
-  },
-  {
-    question: "어떤 음식을 먹고 싶으신가요? 최대 2가지를 선택해주세요",
-    answerNumber: 2,
-    selects: [
-      { text: "한식", id: 1, selected: false },
-      { text: "중식", id: 2, selected: false },
-      { text: "일식", id: 3, selected: false },
-      { text: "패스트 푸드", id: 4, selected: false },
-      { text: "야식", id: 5, selected: false },
-      { text: "분식", id: 6, selected: false },
     ],
   },
 ];
@@ -121,6 +121,9 @@ const SelectPageWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   flex-direction: column;
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const ProgressBar = styled.div`
@@ -140,6 +143,6 @@ const Bar = styled.div`
 const ProgressedBar = styled.div<{ presentWidth: number }>`
   width: ${({ presentWidth }) => `${presentWidth}%`};
   height: 100%;
-  background-color: ${({ theme }) => theme.colors.GREY_COLOR};
+  background-color: ${({ theme }) => theme.colors.LIGHT_GREEN};
   transition: 300ms;
 `;

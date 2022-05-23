@@ -29,7 +29,7 @@ export default MbtiSelectButton;
 const SelectButton = styled.button`
   width: 100%;
   padding: 16px 0;
-  border: 3px solid ${({ theme }) => theme.colors.GREY_COLOR};
+  border: 3px solid ${({ theme }) => theme.colors.LIGHT_GREEN};
   border-radius: 10px;
   font-size: 20px;
   margin-bottom: 77px;

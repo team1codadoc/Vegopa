@@ -69,6 +69,6 @@ const Bar = styled.div`
 const ProgressedBar = styled.div<{ presentWidth: number }>`
   width: ${({ presentWidth }) => `${presentWidth}%`};
   height: 100%;
-  background-color: ${({ theme }) => theme.colors.GREY_COLOR};
+  background-color: ${({ theme }) => theme.colors.LIGHT_GREEN};
   transition: 300ms;
 `;

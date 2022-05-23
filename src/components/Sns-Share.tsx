@@ -41,6 +41,8 @@ const ShareContianer = styled.div`
     width: 38px;
     height: 38px;
     margin: 0 4px;
+    cursor: pointer;
+    border-radius: 4px;
   }
 `;
 

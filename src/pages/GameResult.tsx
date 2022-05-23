@@ -99,7 +99,9 @@ const Button = styled.button`
   font-weight: 400;
   font-size: 14px;
   line-height: 24px;
-  background-color: ${({ theme }) => theme.colors.LIGHT_GREY};
+  background-color: ${({ theme }) => theme.colors.LIGHT_GREEN};
+  border-radius: 8px;
+  cursor: pointer;
 
   span {
     padding: 5px;
