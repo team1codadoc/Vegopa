@@ -2,9 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import { FaAngleRight, FaAngleLeft } from "react-icons/fa";
+import { tokenStorage } from "../store/atom";
 
 const MainChoice = () => {
   const navigate = useNavigate();
+  const token = tokenStorage.getAuthToken();
   return (
     <Wrapper>
       <Container>
@@ -23,7 +25,7 @@ const MainChoice = () => {
         </Button>
         <Img src={"/assets/charEating.png"} />
         <Button>
-          <Link to="/together/login">
+          <Link to={token ? "/together" : "/together/login"}>
             <Arrow>
               <Title>같이</Title>
               <FaAngleRight />
