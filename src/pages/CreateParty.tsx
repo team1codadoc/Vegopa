@@ -1,38 +1,46 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { PartyLocationMap } from "../components/partyLocationMap";
+import { useNavigate } from "react-router-dom";
+import { FaAngleLeft } from "react-icons/fa";
+import { requestAPI } from "../api/Request";
 
 type partyInform = {
   title: string;
   image: string;
   total: number;
   taste: string[];
-  meetingDate: any | unknown;
+  meetingDate: any;
   location: string;
   coordinates: { lat: number; lng: number };
+  creator: string;
 };
 interface Box {
   url: string;
 }
 
 const Restaurant = () => {
+  const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [image, setImage] = useState("");
-  const [creator, setCreator] = useState("");
+  const [creator, setCreator] = useState("6288f85f6c2022fa4b3e77b5");
   const [total, setTotal] = useState(2);
   const [taste, setTaste] = useState([]);
   const [meetingDate, setMeetingDate] = useState<Date>();
   const [location, setLocation] = useState("");
   const [coordinates, setCoordinates] = useState({ lat: 0, lng: 0 });
 
-  const partyInform: partyInform = { title, image, total, taste, meetingDate, location, coordinates };
-  console.log(partyInform);
+  const partyInform: partyInform = { title, image, total, taste, meetingDate, location, coordinates, creator };
 
   const [addTasteInput, setAddTasteInput] = useState("");
   const [addTasteBtn, setAddTasteBtn] = useState(false);
   const addTaste = () => {
-    const res = [...taste, addTasteInput];
-    setTaste(res);
+    if (addTasteInput) {
+      const res = [...taste, addTasteInput];
+      setTaste(res);
+    } else {
+      alert("한 음절 이상 입력해주세요.");
+    }
     setAddTasteInput("");
     setAddTasteBtn(false);
   };
@@ -67,7 +75,9 @@ const Restaurant = () => {
     data.append("file", file);
     data.append("upload_preset", "dtsaonv8");
     console.log(data);
-    const cloudName = "deiyompy0";
+    const cloudName = import.meta.env.VITE_CLOUD_NAME;
+    // const cloudName = "deiyompy0";
+
     const res = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/upload`, {
       method: "POST",
       body: data,
@@ -86,154 +96,161 @@ const Restaurant = () => {
     setImage(uploaded.url);
   };
 
+  const onHandleCreate = async () => {
+    const res = await requestAPI.reqCreatePartyAPI(partyInform);
+    if (res.status === 200) {
+      alert("파티가 등록되었습니다.");
+      navigate("/together");
+    }
+  };
+
   return (
     <Wrapper>
       <Container>
-        {openMap ? <PartyLocationMap query={search} propFunc={propFunc} closeMap={closeMap} /> : ""}
-        <Header>
-          <SectionTitle>파티 생성</SectionTitle>
-        </Header>
+        <GoBack>
+          <FaAngleLeft onClick={() => navigate(-1)} />
+        </GoBack>
+        {openMap ? (
+          <PartyLocationMap query={search} propFunc={propFunc} closeMap={closeMap} />
+        ) : (
+          <Body>
+            <PhotoUpload>
+              {image ? <Box url={image}></Box> : <p>대표 사진을 업로드 해주세요</p>}
 
-        <Body>
-          <PhotoUpload>
-            {image ? <Box url={image}></Box> : <p>대표 사진을 업로드 해주세요</p>}
-
-            <input ref={inputRef} type="file" accept="image/*" onChange={fileChange} />
-            <button onClick={imageUploadBtn}>이미지 업로드</button>
-          </PhotoUpload>
-          <PartyTitle>
-            <Title>파티명</Title>
-            <input
-              type="text"
-              value={title}
-              onChange={(e) => {
-                setTitle(e.target.value);
-              }}
-            ></input>
-            <button>중복확인</button>
-          </PartyTitle>
-          <LimitedNumber>
-            <Title>파티인원</Title>
-            <input
-              type="range"
-              min="2"
-              max="8"
-              value={total}
-              onChange={(e) => {
-                setTotal(+e.target.value);
-              }}
-            ></input>
-            <p>{total} 명</p>
-          </LimitedNumber>
-          <Taste>
-            <TasteHead>
-              <Title>음식취향</Title>
-              <button onClick={() => setAddTasteBtn((prev) => !prev)}>+ 추가</button>
-            </TasteHead>
-            {addTasteBtn && (
-              <TasteInput>
-                <input
-                  type="text"
-                  onChange={(e) => {
-                    setAddTasteInput(e.target.value);
-                  }}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter") {
-                      addTaste();
-                    }
-                  }}
-                ></input>
-                <button onClick={addTaste}>등록</button>
-              </TasteInput>
-            )}
-            <TasteBody>
-              {!taste[0] ? (
-                <p>+ 음식 취향을 등록해주세요</p>
-              ) : (
-                taste.map((v, i) => {
-                  return (
-                    <TasteElement key={i}>
-                      <p>{v}</p>
-                      <button
-                        onClick={() => {
-                          const arr = [...taste];
-                          arr.splice(i, 1);
-                          setTaste(arr);
-                        }}
-                      >
-                        X
-                      </button>
-                    </TasteElement>
-                  );
-                })
+              <input ref={inputRef} type="file" accept="image/*" onChange={fileChange} />
+              <button onClick={imageUploadBtn}>이미지 업로드</button>
+            </PhotoUpload>
+            <PartyTitle>
+              <Title>파티명</Title>
+              <input
+                type="text"
+                value={title}
+                onChange={(e) => {
+                  setTitle(e.target.value);
+                }}
+              ></input>
+              <button>중복확인</button>
+            </PartyTitle>
+            <LimitedNumber>
+              <Title>파티인원</Title>
+              <input
+                type="range"
+                min="2"
+                max="8"
+                value={total}
+                onChange={(e) => {
+                  setTotal(+e.target.value);
+                }}
+              ></input>
+              <p>{total} 명</p>
+            </LimitedNumber>
+            <Taste>
+              <TasteHead>
+                <Title>음식취향</Title>
+                <button onClick={() => setAddTasteBtn((prev) => !prev)}>+ 추가</button>
+              </TasteHead>
+              {addTasteBtn && (
+                <TasteInput>
+                  <input
+                    type="text"
+                    onChange={(e) => {
+                      setAddTasteInput(e.target.value);
+                    }}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        addTaste();
+                      }
+                    }}
+                  ></input>
+                  <button onClick={addTaste}>등록</button>
+                </TasteInput>
               )}
-            </TasteBody>
-          </Taste>
-          <PartyLocation>
-            <Title>모이는곳</Title>
-            <input
-              placeholder="장소명으로 검색해주세요"
-              onChange={(e) => setSearch(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  setOpenMap(true);
-                }
-              }}
-            />
-            <button
-              onClick={() => {
-                if (search) {
-                  setOpenMap(true);
-                } else {
-                  alert("검색어를 입력해주세요.");
-                }
-              }}
-            >
-              🔍
-            </button>
-          </PartyLocation>
 
-          <PartyTime>
-            <Title>모이는시간</Title>
+              <TasteBody>
+                {!taste[0] ? (
+                  <button onClick={() => setAddTasteBtn((prev) => !prev)}>+ 음식 취향을 입력해주세요</button>
+                ) : (
+                  <TasteElementGrid>
+                    {taste.map((v, i) => {
+                      return (
+                        <TasteElement key={i}>
+                          <p>{v}</p>
+                          <button
+                            onClick={() => {
+                              const arr = [...taste];
+                              arr.splice(i, 1);
+                              setTaste(arr);
+                            }}
+                          >
+                            X
+                          </button>
+                        </TasteElement>
+                      );
+                    })}
+                  </TasteElementGrid>
+                )}
+              </TasteBody>
+            </Taste>
+            <PartyLocation>
+              <Title>모이는곳</Title>
+              {location ? (
+                location
+              ) : (
+                <>
+                  <input
+                    placeholder="장소명으로 검색해주세요"
+                    onChange={(e) => setSearch(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        setOpenMap(true);
+                      }
+                    }}
+                  />
+                  <button
+                    onClick={() => {
+                      if (search) {
+                        setOpenMap(true);
+                      } else {
+                        alert("검색어를 입력해주세요.");
+                      }
+                    }}
+                  >
+                    🔍
+                  </button>
+                </>
+              )}
+            </PartyLocation>
 
-            <input type="time" onChange={(e) => setTime(e.target.value)} />
-          </PartyTime>
-          <Register>
-            <button>등록</button>
-          </Register>
-        </Body>
+            <PartyTime>
+              <Title>모이는시간</Title>
+
+              <input type="time" onChange={(e) => setTime(e.target.value)} />
+            </PartyTime>
+            <Register>
+              <button onClick={onHandleCreate}>등록</button>
+            </Register>
+          </Body>
+        )}
       </Container>
     </Wrapper>
   );
 };
 
-const Wrapper = styled.section`
-  background: black;
+const Wrapper = styled.div`
+  height: 100%;
+  background: white;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
-
 const Container = styled.div`
   background-color: ${({ theme }) => theme.colors.WHITE_COLOR};
+  padding: 20px;
   width: 394px;
   height: 670px;
-  padding: 20px;
-`;
-const Header = styled.div`
-  display: block;
-  width: 100%;
-  height: 11%;
-`;
-const SectionTitle = styled.div`
-  background-color: ${({ theme }) => theme.colors.LIGHT_GREY};
-  width: 120px;
-  height: 50px;
-  font-size: 1.5rem;
-  font-weight: 600;
-  border-radius: 10px;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
 `;
 
@@ -241,6 +258,7 @@ const Body = styled.div`
   width: 100%;
   padding: 5px;
 `;
+
 const PhotoUpload = styled.div`
   display: flex;
   flex-direction: column;
@@ -270,6 +288,7 @@ const PartyTitle = styled.div`
   padding: 0 0 30px 0;
   display: flex;
   button {
+    margin-left: 10px;
     background-color: ${({ theme }) => theme.colors.LIGHT_GREY};
     border-radius: 10px;
   }
@@ -277,9 +296,15 @@ const PartyTitle = styled.div`
 const LimitedNumber = styled.div`
   padding: 0 0 30px 0;
   display: flex;
+  input {
+    width: 150px;
+  }
+  p {
+    margin-left: 15px;
+  }
 `;
 const Taste = styled.div`
-  padding: 0 0 30px 0;
+  padding: 0 0 px 0;
 `;
 const TasteHead = styled.div`
   width: 100%;
@@ -287,9 +312,9 @@ const TasteHead = styled.div`
   justify-content: space-between;
 `;
 const TasteInput = styled.div`
+  padding-left: 40px;
   width: 100%;
   height: 25px;
-  background-color: yellow;
   display: flex;
   justify-content: center;
 `;
@@ -300,10 +325,20 @@ const TasteBody = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 60px;
+  height: 100px;
   border: 1px solid ${({ theme }) => theme.colors.DARK_GRAY};
   border-radius: 10px;
   padding: 10px;
+  margin-bottom: 30px;
+`;
+const TasteElementGrid = styled.div`
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 100px 100px 100px;
+  grid-template-rows: 1fr 1fr;
+  justify-content: space-between;
+  align-items: center;
 `;
 const TasteElement = styled.div`
   width: 100px;
@@ -313,13 +348,12 @@ const TasteElement = styled.div`
   align-items: center;
   justify-content: center;
   background-color: ${({ theme }) => theme.colors.LIGHT_GREY};
-  margin-left: 10px;
   p {
     margin-right: 10px;
     font-size: 0.8rem;
   }
   button {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     color: ${({ theme }) => theme.colors.WHITE_COLOR};
     background-color: ${({ theme }) => theme.colors.DARK_RED};
     border-radius: 10px;
@@ -328,10 +362,16 @@ const TasteElement = styled.div`
 const PartyLocation = styled.div`
   padding: 0 0 30px 0;
   display: flex;
+  button {
+    margin-left: 10px;
+  }
 `;
 const PartyTime = styled.div`
   padding: 0 0 30px 0;
   display: flex;
+  input {
+    width: 150px;
+  }
 `;
 const Register = styled.div`
   width: 100%;
@@ -343,10 +383,20 @@ const Register = styled.div`
     height: 50px;
     border-radius: 10px;
     font-size: 1.3rem;
+    :hover {
+      background-color: ${({ theme }) => theme.colors.DARK_GRAY};
+    }
   }
 `;
 const Title = styled.div`
-  width: 24%;
+  width: 28%;
   font-size: 1.1rem;
 `;
+const GoBack = styled.div`
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  font-size: 1.8em;
+`;
+
 export default Restaurant;

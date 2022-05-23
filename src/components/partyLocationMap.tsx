@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import PropTypes from "prop-types";
+import Spinner from "./Spinner";
+import { FaSearch } from "react-icons/fa";
 
 declare global {
   interface Window {
@@ -25,11 +26,11 @@ type Place = {
 };
 
 export const PartyLocationMap = (props) => {
-  const { query } = props;
+  const [isLoading, setIsLoading] = useState(false);
+  const [search, setSearch] = useState(props.query);
+  const [keyWord, setKeyWord] = useState("");
   const { kakao } = window;
   const mapRef = useRef<HTMLDivElement>(null);
-  const searchRef = useRef<HTMLDivElement>(null);
-  const infowindow = useRef<HTMLDivElement>(null);
   const [selectedPlace, setSelectedPlace] = useState<Place>();
 
   const getLocation = () => {
@@ -40,13 +41,16 @@ export const PartyLocationMap = (props) => {
           const container = mapRef.current;
           const options = {
             center: new kakao.maps.LatLng(position.coords.latitude, position.coords.longitude),
-            level: 4,
+            level: 5,
           };
+          if (container !== null) {
+            setIsLoading(true);
+          }
           const map = new kakao.maps.Map(container, options);
 
           const places = new kakao.maps.services.Places(map);
 
-          places.keywordSearch(query, placesSearchCB, {
+          places.keywordSearch(search, placesSearchCB, {
             useMapBounds: true,
           });
 
@@ -97,7 +101,32 @@ export const PartyLocationMap = (props) => {
 
   return (
     <Container>
+      {!isLoading ? (
+        <Loading>
+          <Spinner />
+          <p>지도 불러오는 중...</p>
+        </Loading>
+      ) : (
+        ""
+      )}
       <div ref={mapRef} style={mapStyle}></div>
+      <SearchNearBy>
+        <Icon>
+          <FaSearch />
+        </Icon>
+        <Input
+          type="text"
+          placeholder="장소를 검색해주세요"
+          onChange={(e) => {
+            setKeyWord(e.target.value);
+          }}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              setSearch(keyWord);
+            }
+          }}
+        />
+      </SearchNearBy>
       {selectedPlace && (
         <PlaceInfo>
           <PlaceName>{selectedPlace.place_name}</PlaceName>
@@ -124,6 +153,19 @@ const Container = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
+  div {
+    width: 100%;
+  }
+`;
+const Search = styled.div`
+  width: 80%;
+  position: fixed;
+
+  display: flex;
+
+  justify-content: center;
+  top: 100px;
+  z-index: 10;
 `;
 const PlaceInfo = styled.div`
   background-color: ${({ theme }) => theme.colors.WHITE_COLOR};
@@ -154,4 +196,43 @@ const StyleBtn = styled.button`
   width: 50px;
   height: 30px;
   font-size: 1.1rem;
+`;
+const SearchNearBy = styled.form`
+  width: 80%;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 30px;
+  right: 0;
+  left: 0;
+  margin: auto;
+`;
+const Input = styled.input`
+  width: 100%;
+  background-color: white;
+  border-radius: 10px;
+  border: 1px solid ${({ theme }) => theme.colors.LIGHT_GREY};
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);
+  padding: 10px 40px;
+  position: absolute;
+  z-index: 100;
+`;
+const Icon = styled.div`
+  width: 20px;
+  height: 20px;
+  z-index: 101;
+  position: absolute;
+  left: 15px;
+`;
+const Loading = styled.div`
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  p {
+    margin-top: 3%;
+  }
 `;
