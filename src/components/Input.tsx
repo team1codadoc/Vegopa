@@ -1,7 +1,6 @@
 import React, { useState, useRef } from "react";
 import styled from "styled-components";
 import { FaSearch } from "react-icons/fa";
-import { useRecoilState } from "recoil";
 
 export const Input = () => {
   const [keyword, setKeyword] = useState("");

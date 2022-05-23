@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
-import { FaSearch, FaAngleLeft } from "react-icons/fa";
+import { FaAngleLeft } from "react-icons/fa";
 
 import { MapTogether } from "../components/mapTogether";
 import { Input } from "../components/Input";
@@ -10,27 +10,25 @@ const SearchParty = () => {
   const navigate = useNavigate();
   return (
     <Wrapper>
-      <Container>
-        <Header>
-          <GoBack>
-            <FaAngleLeft onClick={() => navigate(-1)} />
-          </GoBack>
-          <a href="/">
-            <Home>
-              <Img src={"/assets/home_icon.png"} />
-            </Home>
-          </a>
-        </Header>
-        <Input />
-        <MapContainer>
-          <MapTogether />
-        </MapContainer>
-        <NavBar>
-          <Link to="/together/joinParty">
-            <Button>파티 생성하기</Button>
-          </Link>{" "}
-        </NavBar>
-      </Container>
+      <Header>
+        <GoBack>
+          <FaAngleLeft onClick={() => navigate(-1)} />
+        </GoBack>
+        <a href="/">
+          <Home>
+            <Img src={"/assets/home_icon.png"} />
+          </Home>
+        </a>
+      </Header>
+      <Input />
+      <MapContainer>
+        <MapTogether />
+      </MapContainer>
+      <NavBar>
+        <Link to="/together/createParty">
+          <Button>파티 생성하기</Button>
+        </Link>
+      </NavBar>
     </Wrapper>
   );
 };
@@ -40,6 +38,7 @@ export default SearchParty;
 const Wrapper = styled.div`
   background: white;
   height: 100vh;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -110,7 +109,7 @@ const Img = styled.img`
   z-index: 20;
 `;
 const GoBack = styled.div`
-  position: fixed;
+  position: absolute;
   top: 15px;
   left: 15px;
   font-size: 1.8em;

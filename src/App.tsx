@@ -32,6 +32,7 @@ const AppWrapper = styled.main`
   height: 100vh;
   overflow-y: scroll;
   > div {
+    position: relative;
     background-color: #fff;
     max-width: 575px;
     margin: auto;
