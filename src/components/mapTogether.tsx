@@ -10,6 +10,19 @@ declare global {
     kakao: any;
   }
 }
+type Party = {
+  coordinates: { lat: number; lng: number };
+  creator: string;
+  image: string;
+  location: string;
+  meetingDate: string;
+  participants: string[];
+  taste: string[];
+  title: string;
+  total: number;
+  _id: string;
+};
+type PartyAPI = { party: Party[] };
 
 // type Party = {
 //   Object
@@ -49,10 +62,9 @@ export const MapTogether = () => {
   const { kakao } = window;
   const mapRef = useRef<HTMLDivElement>(null);
   const [selectedPlace, setSelectedPlace] = useState<any>();
-  const { data, isLoading } = useQuery("", async () => axios.get("https://vegopa.herokuapp.com/api/party"));
-  console.log(data);
-  // const query = "치킨";
+  const { data, isLoading } = useQuery("", async () => axios.get<PartyAPI>("https://vegopa.herokuapp.com/api/party"));
   const navigate = useNavigate();
+  // const query = "치킨";
 
   const getLocation = () => {
     if (navigator.geolocation) {
@@ -65,49 +77,26 @@ export const MapTogether = () => {
           };
 
           const map = new kakao.maps.Map(container, options);
-          const places = new kakao.maps.services.Places(map);
-          const partyImg = data?.data.party[0].image;
-          const markerImg = new kakao.maps.MarkerImage(partyImg, new kakao.maps.Size(54, 58), {
-            alt: "마커 이미지",
-            shape: "poly",
-            coords: "16,0,20,2,24,6,26,10,26,16,23,22,17,25,14,35,13,35,9,25,6,24,2,20,0,16,0,10,2,6,6,2,10,0",
-          });
 
-          function getQueries() {
-            for (let i = 0; i < data.data.party.length; i++) {
-              return data?.data.party[i].taste;
-            }
-          }
-
-          getQueries().map((query) => {
-            places.keywordSearch(query, placesSearchCB, {
-              useMapBounds: true,
+          data.data.party.forEach(({ _id, image, coordinates }) => {
+            const markerImg = new kakao.maps.MarkerImage(image, new kakao.maps.Size(54, 58), {
+              alt: "마커 이미지",
+              shape: "poly",
+              coords: "16,0,20,2,24,6,26,10,26,16,23,22,17,25,14,35,13,35,9,25,6,24,2,20,0,16,0,10,2,6,6,2,10,0",
             });
-            console.log(query);
+
+            displayMarker(_id, markerImg, coordinates.lat, coordinates.lng);
           });
 
-          // places.keywordSearch(query, placesSearchCB, {
-          //   useMapBounds: true,
-          // });
-
-          const infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
-          function placesSearchCB(data, status, pagination) {
-            if (status === kakao.maps.services.Status.OK) {
-              for (let i = 0; i < data.length; i++) {
-                displayMarker(data[i]);
-              }
-            }
-          }
-
-          function displayMarker(place) {
+          function displayMarker(_id, markerImg, X, Y) {
             const marker = new kakao.maps.Marker({
               map: map,
-              position: new kakao.maps.LatLng(place.y, place.x),
+              position: new kakao.maps.LatLng(Y, X),
               image: markerImg,
             });
             kakao.maps.event.addListener(marker, "click", function () {
-              setSelectedPlace(place);
-              // navigate(`/${place.id}`);
+              // setSelectedPlace(place);
+              navigate(`/party/${_id}`);
             });
           }
         },

@@ -93,7 +93,7 @@ const Arrow = styled.div`
   margin-bottom: 12px;
 `;
 const GoBack = styled.div`
-  position: fixed;
+  position: absolute;
   top: 15px;
   left: 15px;
   font-size: 1.8em;
