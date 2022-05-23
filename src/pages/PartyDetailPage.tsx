@@ -9,7 +9,7 @@ function PartyDetailPage() {
       <Navbar title="파티 상세페이지" />
       <PartyInfo />
       <PartyButtonWrapper>
-        <button>파티 탈퇴하기</button>
+        <button>파티 참가하기</button>
       </PartyButtonWrapper>
     </PartyDetailWrapper>
   );
@@ -26,7 +26,7 @@ const PartyButtonWrapper = styled.div`
     padding: 12px 24px;
     border-radius: 10px;
     color: #fff;
-    background-color: red;
+    background-color: ${({ theme }) => theme.colors.LIGHT_GREEN};
     font-size: 18px;
   }
 `;
