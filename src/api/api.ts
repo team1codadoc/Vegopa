@@ -1,6 +1,6 @@
 /* eslint-disable indent */
 import axios, { AxiosInstance } from "axios";
-import { tokenStorage } from "../store/atom";
+import { tokenStorage } from "../store/token";
 
 export type FoodType = {
   _id: number;
@@ -42,5 +42,6 @@ export default class Request {
 
   reqFoodAPI = () => this.req.get<{ foods: FoodType[] }>("/api/food");
   reqLogIn = (body) => this.req.post<userType>("/api/user/login", body);
-  reqSignUp = (body: signUpBodyType) => this.req.post<userType>("/api/user/signup", body);
+  reqSignUp = (body: signUpBodyType) => this.req.post("/api/user/signup", body);
+  reqEmailValid = (body) => this.req.post("/api/user/emailValid", body);
 }

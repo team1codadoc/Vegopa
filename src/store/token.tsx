@@ -1,10 +1,3 @@
-import { atom } from "recoil";
-
-export const LogInToken = atom({
-  key: "LogInToken",
-  default: "",
-});
-
 class TokenStorage {
   private authToken = "";
 

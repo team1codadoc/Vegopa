@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import { FaAngleRight, FaAngleLeft } from "react-icons/fa";
-import { tokenStorage } from "../store/atom";
+import { tokenStorage } from "../store/token";
 
 const MainChoice = () => {
   const navigate = useNavigate();

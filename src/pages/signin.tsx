@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
@@ -5,12 +6,11 @@ import { requestAPI } from "../api/Request";
 
 const SignIn = () => {
   const navigator = useNavigate();
-
+  const regEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
   const url = `https://api.cloudinary.com/v1_1/${import.meta.env.VITE_IMG_NAME}/image/upload`;
 
   const initialError = {
     email: {
-      duplicate: false,
       format: false,
     },
     password: {
@@ -20,6 +20,8 @@ const SignIn = () => {
     username: false,
   };
   const [imgUrl, setImgUrl] = useState("");
+  const [emailValid, setEmailValid] = useState({ text: "", valid: false });
+  const [email, setEmail] = useState("");
   const [error, setError] = useState(initialError);
 
   const fileUploadHandler: React.ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -37,12 +39,9 @@ const SignIn = () => {
     });
   };
   const validation = (email: string, password: string, confirmPassword: string, username: string) => {
-    // eslint-disable-next-line no-useless-escape
-    const regEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
-
     setError({
       ...error,
-      email: { format: !regEmail.test(email), duplicate: error.email.duplicate },
+      email: { format: !regEmail.test(email) },
       password: {
         length: password.length < 5,
         confirm: password !== confirmPassword,
@@ -73,6 +72,22 @@ const SignIn = () => {
     }
   };
 
+  const handleEmailValidButton = () => {
+    setError({
+      ...error,
+      email: { format: !regEmail.test(email) },
+    });
+    if (!regEmail.test(email)) return;
+    requestAPI
+      .reqEmailValid({ email })
+      .then((res) => {
+        setEmailValid({ text: res.data.message, valid: true });
+      })
+      .catch((e) => {
+        setEmailValid({ text: e.response.data.message, valid: true });
+      });
+  };
+
   const SignInButtonHandler = () => {
     // navigator("/together/login"); // if 아이디
   };
@@ -83,8 +98,12 @@ const SignIn = () => {
         <form onSubmit={signSubmitHandler}>
           <Email>
             <div className="EmailText">이메일</div>
-            <input placeholder="ex) abcdefgh@email.com" type="email" />
+            <input placeholder="ex) abcdefgh@email.com" type="email" onChange={(e) => setEmail(e.target.value)} />
+            <button type="button" onClick={handleEmailValidButton}>
+              중복확인
+            </button>
             {error.email.format && <span>이메일 형식이 아닙니다.</span>}
+            {emailValid.valid && <span>{emailValid.text}</span>}
           </Email>
           <Password>
             <div className="PasswordText">비밀번호</div>

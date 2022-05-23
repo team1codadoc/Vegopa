@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { requestAPI } from "../api/Request";
-import { tokenStorage } from "../store/atom";
+import { tokenStorage } from "../store/token";
 
 const Login = () => {
   const navigator = useNavigate();
